@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_characters">
+
+    <fragment
+        android:id="@+id/navigation_characters"
+        android:name="com.example.hp_wiki.ui.characters.CharactersFragment"
+        android:label="Characters"
+        tools:layout="@layout/fragment_characters" />
+
+    <fragment
+        android:id="@+id/navigation_spells"
+        android:name="com.example.hp_wiki.ui.spells.SpellsFragment"
+        android:label="Spells"
+        tools:layout="@layout/fragment_spells" />
+
+    <fragment
+        android:id="@+id/navigation_houses"
+        android:name="com.example.hp_wiki.ui.houses.HousesFragment"
+        android:label="Houses"
+        tools:layout="@layout/fragment_houses" />
+</navigation>
