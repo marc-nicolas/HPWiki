@@ -6,11 +6,10 @@ import com.example.hp_wiki.model.Wand;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Iterator;
 
 public class HPAPIJsonParser {
 
-    public static Person createCharacterFromJsonString(String badiJsonString) throws JSONException {
+    public static Person createPersonFromJsonString(String badiJsonString) throws JSONException {
         JSONObject jsonObj = new JSONObject(badiJsonString);
 
         Person person = new Person(
