@@ -1,6 +1,7 @@
 package com.example.hp_wiki;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
