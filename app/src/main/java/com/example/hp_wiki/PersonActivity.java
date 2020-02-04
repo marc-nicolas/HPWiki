@@ -2,12 +2,17 @@ package com.example.hp_wiki;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -18,10 +23,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.hp_wiki.dal.PersonDao;
 import com.example.hp_wiki.helper.HPAPIJsonParser;
 import com.example.hp_wiki.model.Person;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONException;
+
+import java.util.List;
 
 public class PersonActivity extends AppCompatActivity {
 
@@ -34,20 +43,22 @@ public class PersonActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_persons);
+        setContentView(R.layout.fragment_characters);
 
-        progressBar = findViewById(R.id.loading_badi_details_progress);
+        progressBar = findViewById(R.id.loading_person_details_progress);
         Intent intent = getIntent();
-        String name = intent.getStringExtra("badiName");
+        String name = intent.getStringExtra("personsName");
         setTitle(name);
         progressBar.setVisibility(View.VISIBLE);
-        getPersons(API_URL_HPAPI);
+        //getPersons(API_URL_HPAPI);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-    }
+        addPersonsToClickableList();
 
+    }
+/*
     private void getPersons(String url) {
         final ArrayAdapter<Person> personInfosAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1);
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
@@ -55,10 +66,10 @@ public class PersonActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
-                    Person person = HPAPIJsonParser.createPersonFromJsonString(response);
+                    List<Person> persons = HPAPIJsonParser.createPersonFromJsonString(response);
                     // verwende die gemerkte Id auf der folgenden Seite
-                    ListView badiInfoList = findViewById(R.id.personList);
-                    badiInfoList.setAdapter(personInfosAdapter);
+                    ListView personInfoList = findViewById(R.id.personList);
+                    personInfoList.setAdapter(personInfosAdapter);
                     progressBar.setVisibility(View.GONE);
                 } catch (JSONException e) {
                     generateAlertDialog();
@@ -71,7 +82,7 @@ public class PersonActivity extends AppCompatActivity {
         });
         queue.add(stringRequest);
     }
-
+*/
     private void generateAlertDialog() {
         progressBar.setVisibility(View.GONE);
         AlertDialog.Builder dialogBuilder;
@@ -84,5 +95,20 @@ public class PersonActivity extends AppCompatActivity {
         });
         dialogBuilder.setMessage("Die Badidetails konnten nicht geladen werden. Versuche es später nochmals.").setTitle("Fehler");
         AlertDialog dialog = dialogBuilder.create(); dialog.show();
+    }
+
+    public void addPersonsToClickableList() {
+        ListView persons = findViewById(R.id.personList);
+        ArrayAdapter<Person> personAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1);
+        personAdapter.addAll(PersonDao.getAll());
+        persons.setAdapter(personAdapter);
+        AdapterView.OnItemClickListener mListClickedHandler = new AdapterView.OnItemClickListener(){
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), PersonActivity.class);
+                Person selected = (Person)parent.getItemAtPosition(position);
+                intent.putExtra("personName", selected.getName());
+                startActivity(intent);
+            }
+        };
     }
 }
