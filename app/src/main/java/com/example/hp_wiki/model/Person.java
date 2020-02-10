@@ -1,8 +1,10 @@
 package com.example.hp_wiki.model;
 
+import androidx.annotation.NonNull;
+
 import java.util.Date;
 
-public class Person {
+public class Person  {
     private String name;
     private String alias;
     private String species;
@@ -51,11 +53,19 @@ public class Person {
         this.image = image;
     }
 
+    public Person() {
+
+    }
+
     public void setRole(String role) {
         this.role = role;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

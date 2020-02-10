@@ -2,10 +2,6 @@ package com.example.hp_wiki;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -17,20 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.hp_wiki.dal.PersonDao;
-import com.example.hp_wiki.helper.HPAPIJsonParser;
 import com.example.hp_wiki.model.Person;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import org.json.JSONException;
-
-import java.util.List;
 
 public class PersonActivity extends AppCompatActivity {
 
@@ -58,7 +42,8 @@ public class PersonActivity extends AppCompatActivity {
         addPersonsToClickableList();
 
     }
-/*
+
+    /*
     private void getPersons(String url) {
         final ArrayAdapter<Person> personInfosAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1);
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
