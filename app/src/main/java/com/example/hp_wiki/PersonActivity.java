@@ -29,7 +29,7 @@ public class PersonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_characters);
 
-        progressBar = findViewById(R.id.loading_person_details_progress);
+        //progressBar = findViewById(R.id.loading_person_details_progress);
         Intent intent = getIntent();
         String name = intent.getStringExtra("personsName");
         setTitle(name);
@@ -83,7 +83,7 @@ public class PersonActivity extends AppCompatActivity {
     }
 
     public void addPersonsToClickableList() {
-        ListView persons = findViewById(R.id.personList);
+        /*ListView persons = findViewById(R.id.personList);
         ArrayAdapter<Person> personAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1);
         personAdapter.addAll(PersonDao.getAll());
         persons.setAdapter(personAdapter);
@@ -94,6 +94,6 @@ public class PersonActivity extends AppCompatActivity {
                 intent.putExtra("personName", selected.getName());
                 startActivity(intent);
             }
-        };
+        };*/
     }
 }
