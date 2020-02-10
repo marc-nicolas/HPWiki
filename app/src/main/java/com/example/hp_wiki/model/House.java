@@ -9,4 +9,12 @@ public class House {
     private String school;
     private String[] values;
     private String[] colors;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
