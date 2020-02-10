@@ -1,7 +1,31 @@
 <resources>
     <string name="app_name">HP-Wiki</string>
-    <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
+    <string name="title_activity_bottom_navigation">HP-Wiki</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <string-array name="spells_array">
+        <item>Charm</item>
+        <item>Curse</item>
+        <item>Enchantment</item>
+        <item>Hex</item>
+        <item>Jinx</item>
+        <item>Spell</item>
+    </string-array>
+
+    <string-array name="house_array">
+        <item>Gryffindor</item>
+        <item>Hufflepuff</item>
+        <item>Ravenclaw</item>
+        <item>Slytherin</item>
+    </string-array>
+
+    <string-array name="blood_array">
+        <item>Half-blood</item>
+        <item>Pure-blood</item>
+        <item>Muggle-born</item>
+        <item>Muggle</item>
+        <item>Squib</item>
+    </string-array>
 </resources>

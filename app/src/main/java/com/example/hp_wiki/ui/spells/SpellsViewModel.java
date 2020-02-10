@@ -10,7 +10,7 @@ public class SpellsViewModel extends ViewModel {
 
     public SpellsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is spells fragment");
+        //mText.setValue("This is spells fragment");
     }
 
     public LiveData<String> getText() {

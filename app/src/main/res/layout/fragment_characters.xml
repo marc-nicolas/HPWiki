@@ -4,20 +4,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-
-    <TextView
-        android:id="@+id/text_characters"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp" >
 
+        <ImageButton
+            android:id="@+id/spells_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@color/cardview_light_background"
+            android:src="@drawable/zoom_32" />
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="38dp"
+            android:inputType="text"/>
+
+        <Spinner
+            android:id="@+id/house_filters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/house_array"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="200dp"
+            android:spinnerMode="dropdown" />
+        <Spinner
+            android:id="@+id/blood_filters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/blood_array"
+            android:layout_marginTop="60dp"
+            android:spinnerMode="dropdown"
+            android:layout_marginLeft="200dp"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
