@@ -34,6 +34,7 @@
             android:layout_marginTop="60dp"
             android:layout_marginRight="200dp"
             android:spinnerMode="dropdown" />
+
         <Spinner
             android:id="@+id/blood_filters"
             android:layout_width="match_parent"

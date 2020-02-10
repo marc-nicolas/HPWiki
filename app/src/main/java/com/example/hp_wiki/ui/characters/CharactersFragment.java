@@ -9,9 +9,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -55,6 +57,24 @@ public class CharactersFragment extends Fragment {
         //charactersViewModel = new CharactersViewModel();
 
         View root = inflater.inflate(R.layout.fragment_characters, container, false);
+        afterSearch(root);
+        houseFilter(root);
+        bloodFilter(root);
+
+        //final TextView textView = root.findViewById(R.id.text_characters);
+        charactersViewModel.getText().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                //textView.setText(s);
+            }
+        });
+
+        this.getCharacters();
+
+        return root;
+    }
+
+    private void afterSearch(View root){
         final EditText search = root.findViewById(R.id.name);
 
         search.addTextChangedListener(new TextWatcher() {
@@ -70,7 +90,6 @@ public class CharactersFragment extends Fragment {
             }
 
             public void afterTextChanged(Editable s) {
-                Log.d("search", String.valueOf(search.getText()));
                 final ListView listView = getActivity().findViewById(R.id.personList);
                 List<String> filteredList = new ArrayList<>();
                 for(String person : personNames){
@@ -83,28 +102,60 @@ public class CharactersFragment extends Fragment {
                 listView.setAdapter(personAdapter);
             }
         });
+    }
 
-        //final TextView textView = root.findViewById(R.id.text_characters);
-        charactersViewModel.getText().observe(this, new Observer<String>() {
+    private void houseFilter(View root){
+        final Spinner houseFilter = root.findViewById(R.id.house_filters);
+
+        houseFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onChanged(@Nullable String s) {
-                //textView.setText(s);
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                final ListView listView = getActivity().findViewById(R.id.personList);
+                List<String> filteredList = new ArrayList<>();
+
+                for(int i = 0; i < persons.size(); i++){
+                    if(houseFilter.getSelectedItem().toString().equals("House")){
+                        filteredList = personNames;
+                    }
+                    if (persons.get(i).getHouse().equals(houseFilter.getSelectedItem().toString())){
+                        filteredList.add(personNames.get(i));
+                    }
+                }
+                ArrayAdapter<String> personAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
+                personAdapter.addAll(filteredList);
+                listView.setAdapter(personAdapter);
             }
-        });
 
-        this.getCharacters();
-
-        /*
-
-        charactersViewModel.getListtest().observe(this, new Observer<String>() {
             @Override
-            public void onChanged(@Nullable String s) {
-                listView.setAdapter(s);
-            }
+            public void onNothingSelected(AdapterView<?> parentView) {}
         });
-        */
+    }
 
-        return root;
+    private void bloodFilter(View root){
+        final Spinner bloodFilter = root.findViewById(R.id.blood_filters);
+
+        bloodFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                final ListView listView = getActivity().findViewById(R.id.personList);
+                List<String> filteredList = new ArrayList<>();
+
+                for(int i = 0; i < persons.size(); i++){
+                    if(bloodFilter.getSelectedItem().toString().equals("Blood Status")){
+                        filteredList = personNames;
+                    }
+                    if (persons.get(i).getBloodStatus().equals(bloodFilter.getSelectedItem().toString().toLowerCase())){
+                        filteredList.add(personNames.get(i));
+                    }
+                }
+                ArrayAdapter<String> personAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
+                personAdapter.addAll(filteredList);
+                listView.setAdapter(personAdapter);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {}
+        });
     }
 
     private void getCharacters()
@@ -152,7 +203,7 @@ public class CharactersFragment extends Fragment {
             e.printStackTrace();
         }
 
-        for(int i=0;i<jsonArray.length();i++){
+        for (int i = 0; i < jsonArray.length(); i++) {
 
             JSONObject jsonObj = null;
             Person person = null;
@@ -183,6 +234,12 @@ public class CharactersFragment extends Fragment {
                 if (jsonObj.getString("name") != null) {
                     person.setName(jsonObj.getString("name"));
                 }
+                if (jsonObj.getString("house") != null) {
+                    person.setHouse(jsonObj.getString("house"));
+                }
+                if (jsonObj.getString("ancestry") != null) {
+                    person.setBloodStatus(jsonObj.getString("ancestry"));
+                }
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -195,5 +252,4 @@ public class CharactersFragment extends Fragment {
         Log.d("Testen", "Zum Testen");
         return persons;
     }
-
 }

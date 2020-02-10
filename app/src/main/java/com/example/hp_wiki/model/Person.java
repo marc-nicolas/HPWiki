@@ -68,4 +68,20 @@ public class Person  {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getHouse() {
+        return house;
+    }
+
+    public void setHouse(String house) {
+        this.house = house;
+    }
+
+    public String getBloodStatus() {
+        return bloodStatus;
+    }
+
+    public void setBloodStatus(String bloodStatus) {
+        this.bloodStatus = bloodStatus;
+    }
 }
