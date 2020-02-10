@@ -3,11 +3,14 @@ package com.example.hp_wiki.ui.characters;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -41,6 +44,8 @@ public class CharactersFragment extends Fragment {
     private CharactersViewModel charactersViewModel;
 
     private static final String API_URL_HPAPI = "https://hp-api.herokuapp.com/api/characters";
+    private List<Person> persons = new ArrayList<>();
+    private List<String> personNames;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -50,6 +55,35 @@ public class CharactersFragment extends Fragment {
         //charactersViewModel = new CharactersViewModel();
 
         View root = inflater.inflate(R.layout.fragment_characters, container, false);
+        final EditText search = root.findViewById(R.id.name);
+
+        search.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            public void afterTextChanged(Editable s) {
+                Log.d("search", String.valueOf(search.getText()));
+                final ListView listView = getActivity().findViewById(R.id.personList);
+                List<String> filteredList = new ArrayList<>();
+                for(String person : personNames){
+                    if (person.toLowerCase().contains(s.toString().toLowerCase())){
+                        filteredList.add(person);
+                    }
+                }
+                ArrayAdapter<String> personAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
+                personAdapter.addAll(filteredList);
+                listView.setAdapter(personAdapter);
+            }
+        });
+
         //final TextView textView = root.findViewById(R.id.text_characters);
         charactersViewModel.getText().observe(this, new Observer<String>() {
             @Override
@@ -80,13 +114,13 @@ public class CharactersFragment extends Fragment {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL_HPAPI, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                List<Person> persons =  personJsonParser(response);
+                persons =  personJsonParser(response);
                 final ListView listView = getActivity().findViewById(R.id.personList);
 
                 ArrayAdapter<String> personAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
                 //personAdapter.addAll(charactersViewModel.getPersons(getContext()));
 
-                List<String> personNames = new LinkedList<String>();
+                personNames = new LinkedList<String>();
                 for (Person p: persons) {
                     personNames.add(p.getName());
                 }
