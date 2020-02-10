@@ -1,79 +1,77 @@
 package com.example.hp_wiki.ui.characters;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.hp_wiki.helper.HPAPIJsonParser;
 import com.example.hp_wiki.model.Person;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
 
 public class CharactersViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
     private MutableLiveData<List<String>> mListTest;
     private List<String> listtest;
-    private List<Person> persons;
+    private List<Person> persons = new ArrayList<>();
 
     public CharactersViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("lol");
+        mText.setValue("fwef");
 
         listtest = new LinkedList<String>();
-        this.loadTest();
-        loadPersons();
+        //loadPersons();
     }
 
     public LiveData<String> getText() {
         return mText;
     }
 
-    public LiveData<List<String>> getListtest() {
-        if(mListTest == null){
-            mListTest = new MutableLiveData<>();
-            loadTest();
-        }
-        return  mListTest;
-    }
-
-    public List<String> getList() {
-        return  listtest;
-    }
 
     private void loadTest() {
-        listtest.add("haud");
-        listtest.add("qef");
+        //listtest.add("haud");
+        //listtest.add("qef");
        // mListTest.setValue(listtest);
     }
 
-    public LiveData<List<String>> getPersonsLiveData() {
+    /*public LiveData<List<String>> getPersonsLiveData() {
         if(mListTest == null){
             mListTest = new MutableLiveData<>();
-            loadTest();
+            //            loadTest();
         }
-        return  mListTest;
-    }
+        return mListTest;
+    }*/
 
+/*
     public List<String> getPersons(Context context) {
+
+
+
+        HPAPIJsonParser parser = new HPAPIJsonParser();
         try {
-            HPAPIJsonParser parser = new HPAPIJsonParser();
             persons = parser.createPersonFromJsonString(context);
+            for(Person person : persons){
+                Log.d("Person", person.getName());
+            }
         } catch (JSONException e) {
+            Log.d("Error", "error");
             e.printStackTrace();
         }
-        return  listtest;
+        for (Person person : persons) {
+            Log.d("name: ", person.getName());
+            listtest.add(person.getName());
+        }
+        return listtest;
     }
 
     private void loadPersons() {
 
-
-    }
+    }*/
 }
