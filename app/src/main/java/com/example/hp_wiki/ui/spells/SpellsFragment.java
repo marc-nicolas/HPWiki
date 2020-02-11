@@ -7,9 +7,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -43,6 +45,7 @@ public class SpellsFragment extends Fragment {
     private SpellsViewModel spellsViewModel;
     private Searcher searcher = new Searcher();
 
+    private List<Spell> spells = new ArrayList<>();
     private List<String> spellNames;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public class SpellsFragment extends Fragment {
 
         getSpells();
         addSearchListener(root);
+        addTypeFilterListener(root);
 
         return root;
     }
@@ -75,6 +79,33 @@ public class SpellsFragment extends Fragment {
                 spellAdapter.addAll(searcher.search(spellNames, s.toString()));
                 listView.setAdapter(spellAdapter);
             }
+        });
+    }
+
+    private void addTypeFilterListener(View root){
+        final Spinner spellFilter = root.findViewById(R.id.spell_filters);
+
+        spellFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                final ListView listView = getActivity().findViewById(R.id.spellList);
+                List<String> filteredList = new ArrayList<>();
+
+                for(int i = 0; i < spells.size(); i++){
+                    if(spellFilter.getSelectedItem().toString().equals("Type")){
+                        filteredList = spellNames;
+                    }
+                    if (spells.get(i).getType().equals(spellFilter.getSelectedItem().toString())){
+                        filteredList.add(spellNames.get(i));
+                    }
+                }
+                ArrayAdapter<String> spellAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
+                spellAdapter.addAll(filteredList);
+                listView.setAdapter(spellAdapter);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {}
         });
     }
 
@@ -114,7 +145,7 @@ public class SpellsFragment extends Fragment {
     private List<Spell> spellsJsonParser(String json) {
 
         JSONArray jsonArray = null;
-        List<Spell> spells = new ArrayList<>();
+        spells = new ArrayList<>();
 
         try {
             jsonArray = new JSONArray(json);
@@ -133,6 +164,9 @@ public class SpellsFragment extends Fragment {
                 if (jsonObj.getString("spell") != null) {
                     spell.setName(jsonObj.getString("spell"));
                 }
+                if (jsonObj.getString("type") != null) {
+                    spell.setType(jsonObj.getString("type"));
+                }
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -142,7 +176,6 @@ public class SpellsFragment extends Fragment {
                 spells.add(spell);
             }
         }
-        Log.d("Testen", "Zum Testen");
         return spells;
     }
 

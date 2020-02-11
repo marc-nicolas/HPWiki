@@ -151,6 +151,7 @@ public class CharactersFragment extends Fragment {
         });
     }
 
+    // Gets Characters from API
     private void getCharacters()
     {
         RequestQueue queue = Volley.newRequestQueue(getActivity());
@@ -195,6 +196,7 @@ public class CharactersFragment extends Fragment {
         Log.d("alert", "Could not get data.");
     }
 
+    // Adds names of the Persons to a List
     private List<Person> personJsonParser(String json) {
 
         JSONArray jsonArray = null;

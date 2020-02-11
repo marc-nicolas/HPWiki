@@ -27,7 +27,7 @@
 
 
         <Spinner
-            android:id="@+id/spells_filters"
+            android:id="@+id/spell_filters"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:entries="@array/spells_array"
