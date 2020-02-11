@@ -2,10 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_characters"
+        android:id="@+id/navigation_persons"
         android:icon="@drawable/profil"
-        android:title="Characters"
-        />
+        android:title="Persons" />
 
     <item
         android:id="@+id/navigation_spells"

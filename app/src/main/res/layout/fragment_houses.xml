@@ -8,12 +8,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingLeft="16dp"
-        android:paddingRight="16dp" >
+        android:paddingRight="16dp">
 
         <ListView
+            android:id="@+id/houseList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/houseList"/>
+            android:layout_height="match_parent" />
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

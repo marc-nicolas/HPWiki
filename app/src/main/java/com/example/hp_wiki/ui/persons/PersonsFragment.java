@@ -52,18 +52,18 @@ public class PersonsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         personsViewModel =
                 ViewModelProviders.of(this).get(PersonsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_characters, container, false);
+        View root = inflater.inflate(R.layout.fragment_persons, container, false);
         addSearchListener(root);
         addHouseFilterListener(root);
         addBloodFilterListener(root);
 
-        this.getCharacters();
+        this.getPersons();
 
         return root;
     }
 
-    private void addSearchListener(View root){
-        final EditText search = root.findViewById(R.id.search_characters);
+    private void addSearchListener(View root) {
+        final EditText search = root.findViewById(R.id.search_persons);
         search.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -85,7 +85,7 @@ public class PersonsFragment extends Fragment {
         });
     }
 
-    private void addHouseFilterListener(View root){
+    private void addHouseFilterListener(View root) {
         final Spinner houseFilter = root.findViewById(R.id.house_filters);
 
         houseFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -94,11 +94,11 @@ public class PersonsFragment extends Fragment {
                 final ListView listView = getActivity().findViewById(R.id.personList);
                 List<String> filteredList = new ArrayList<>();
 
-                for(int i = 0; i < persons.size(); i++){
-                    if(houseFilter.getSelectedItem().toString().equals("House")){
+                for (int i = 0; i < persons.size(); i++) {
+                    if (houseFilter.getSelectedItem().toString().equals("House")) {
                         filteredList = personNames;
                     }
-                    if (persons.get(i).getHouse().equals(houseFilter.getSelectedItem().toString())){
+                    if (persons.get(i).getHouse().equals(houseFilter.getSelectedItem().toString())) {
                         filteredList.add(personNames.get(i));
                     }
                 }
@@ -108,11 +108,12 @@ public class PersonsFragment extends Fragment {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parentView) {}
+            public void onNothingSelected(AdapterView<?> parentView) {
+            }
         });
     }
 
-    private void addBloodFilterListener(View root){
+    private void addBloodFilterListener(View root) {
         final Spinner bloodFilter = root.findViewById(R.id.blood_filters);
 
         bloodFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -121,11 +122,11 @@ public class PersonsFragment extends Fragment {
                 final ListView listView = getActivity().findViewById(R.id.personList);
                 List<String> filteredList = new ArrayList<>();
 
-                for(int i = 0; i < persons.size(); i++){
-                    if(bloodFilter.getSelectedItem().toString().equals("Blood Status")){
+                for (int i = 0; i < persons.size(); i++) {
+                    if (bloodFilter.getSelectedItem().toString().equals("Blood Status")) {
                         filteredList = personNames;
                     }
-                    if (persons.get(i).getBloodStatus().equals(bloodFilter.getSelectedItem().toString().toLowerCase())){
+                    if (persons.get(i).getBloodStatus().equals(bloodFilter.getSelectedItem().toString().toLowerCase())) {
                         filteredList.add(personNames.get(i));
                     }
                 }
@@ -135,35 +136,35 @@ public class PersonsFragment extends Fragment {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parentView) {}
+            public void onNothingSelected(AdapterView<?> parentView) {
+            }
         });
     }
 
-    // Gets Characters from API
-    private void getCharacters()
-    {
+    // Gets Persons from API
+    private void getPersons() {
         RequestQueue queue = Volley.newRequestQueue(getActivity());
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL_HPAPI, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                persons =  personJsonParser(response);
+                persons = personJsonParser(response);
                 final ListView listView = getActivity().findViewById(R.id.personList);
 
                 ArrayAdapter<String> personAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
                 //personAdapter.addAll(personsViewModel.getPersons(getContext()));
 
                 personNames = new LinkedList<String>();
-                for (Person p: persons) {
+                for (Person p : persons) {
                     personNames.add(p.getName());
                 }
 
                 personAdapter.addAll(personNames);
                 listView.setAdapter(personAdapter);
                 AdapterView.OnItemClickListener mListClickedHandler = new AdapterView.OnItemClickListener() {
-                    public void onItemClick(AdapterView parent, View v, int position, long id ){
+                    public void onItemClick(AdapterView parent, View v, int position, long id) {
                         Intent intent = new Intent(getContext(), PersonActivity.class);
-                        String selected = (String)parent.getItemAtPosition(position);
+                        String selected = (String) parent.getItemAtPosition(position);
                         intent.putExtra("personName", selected);
                         startActivity(intent);
                     }
@@ -171,7 +172,8 @@ public class PersonsFragment extends Fragment {
                 listView.setOnItemClickListener(mListClickedHandler);
             }
         }, new Response.ErrorListener() {
-            @Override public void onErrorResponse(VolleyError error) {
+            @Override
+            public void onErrorResponse(VolleyError error) {
                 generateAlertDialog();
             }
         });

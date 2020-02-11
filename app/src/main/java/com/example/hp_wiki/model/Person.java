@@ -1,6 +1,6 @@
 package com.example.hp_wiki.model;
 
-public class Person  {
+public class Person {
     private String name;
     private String species;
     private String gender;

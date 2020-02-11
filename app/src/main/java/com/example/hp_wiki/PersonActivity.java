@@ -56,7 +56,7 @@ public class PersonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person);
         progressBar = findViewById(R.id.loading_person_details_progress);
-        setVariableCharacter();
+        setVariablePerson();
         Intent intent = getIntent();
         name = intent.getStringExtra("personName");
         setTitle(name);
@@ -68,7 +68,7 @@ public class PersonActivity extends AppCompatActivity {
         }
     }
 
-    private void setVariableCharacter(){
+    private void setVariablePerson() {
         bloodStatus = findViewById(R.id.blood);
         role = findViewById(R.id.role);
         house = findViewById(R.id.house);
@@ -87,7 +87,7 @@ public class PersonActivity extends AppCompatActivity {
         length_wand_info = findViewById(R.id.length_wand_info);
     }
 
-    private void setCharacterInfos(Person person){
+    private void setPersonInfos(Person person) {
         bloodStatus.setText(person.getBloodStatus());
         role.setText(person.getRole());
         house.setText(person.getHouse());
@@ -96,7 +96,7 @@ public class PersonActivity extends AppCompatActivity {
         eye_color.setText(person.getEyeColor());
         actour.setText(person.getActor());
         gender.setText(person.getGender());
-        if(person.getWand() != null){
+        if (person.getWand() != null) {
             wand.setText("WAND");
             core_info.setText("CORE");
             wood_info.setText("WOOD");
@@ -108,7 +108,7 @@ public class PersonActivity extends AppCompatActivity {
         Picasso.get().load(person.getImage()).into(image);
     }
 
-    private void getPerson(){
+    private void getPerson() {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL_HPAPI, new Response.Listener<String>() {
@@ -117,7 +117,7 @@ public class PersonActivity extends AppCompatActivity {
                 try {
                     Person person = HPAPIJsonParser.createPersonFromJsonString(response, name);
                     progressBar.setVisibility(View.GONE);
-                    setCharacterInfos(person);
+                    setPersonInfos(person);
                 } catch (JSONException e) {
                     generateAlertDialog();
                 }
@@ -146,7 +146,7 @@ public class PersonActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        for(int i=0;i<jsonArray.length();i++){
+        for (int i = 0; i < jsonArray.length(); i++) {
 
             JSONObject jsonObj = null;
             Person person = null;

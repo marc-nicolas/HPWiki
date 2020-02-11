@@ -5,9 +5,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingLeft="16dp"
-        android:paddingRight="16dp" >
+        android:paddingRight="16dp">
 
         <ImageButton
             android:id="@+id/search_icon"
@@ -23,23 +27,25 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginRight="38dp"
-            android:inputType="text"/>
+            android:inputType="text" />
 
 
         <Spinner
             android:id="@+id/spell_filters"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/spells_array"
             android:layout_marginTop="60dp"
+            android:entries="@array/spells_array"
             android:spinnerMode="dropdown" />
 
+    </RelativeLayout>
+
         <ListView
+            android:id="@+id/spellList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="100dp"
-            android:layout_marginBottom="60dp"
-            android:id="@+id/spellList"/>
+            android:layout_marginBottom="60dp" />
 
     </RelativeLayout>
 

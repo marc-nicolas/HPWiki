@@ -48,17 +48,17 @@ public class SpellActivity extends AppCompatActivity {
         }
     }
 
-    private void setVariableSpell(){
+    private void setVariableSpell() {
         type = findViewById(R.id.type);
         effect = findViewById(R.id.effect);
     }
 
-    private void setSpellInfos(Spell spell){
+    private void setSpellInfos(Spell spell) {
         type.setText(spell.getType());
         effect.setText(spell.getEffect());
     }
 
-    private void getSpell(){
+    private void getSpell() {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL_HPAPI, new Response.Listener<String>() {
