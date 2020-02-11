@@ -4,8 +4,7 @@
     <item
         android:id="@+id/navigation_persons"
         android:icon="@drawable/profil"
-        android:title="Persons"
-        />
+        android:title="Persons" />
 
     <item
         android:id="@+id/navigation_spells"

@@ -141,7 +141,7 @@ public class PersonsFragment extends Fragment {
         });
     }
 
-    // Gets Characters from API
+    // Gets Persons from API
     private void getPersons() {
         RequestQueue queue = Volley.newRequestQueue(getActivity());
 

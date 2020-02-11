@@ -38,10 +38,8 @@ public class HousesFragment extends Fragment {
 
     private static final String API_URL_POTTERAPI = "https://www.potterapi.com/v1/houses?key=$2a$10$cggq81VeZaQW/8j1bgQhc./UQfKWMSRxCBjBkSMz842XquC7pxiqO";
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        housesViewModel =
-                ViewModelProviders.of(this).get(HousesViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        housesViewModel = ViewModelProviders.of(this).get(HousesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_houses, container, false);
 
         this.getHouses();

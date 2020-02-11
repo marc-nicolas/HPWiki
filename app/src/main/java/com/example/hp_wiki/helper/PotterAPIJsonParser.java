@@ -68,6 +68,7 @@ public class PotterAPIJsonParser {
         house.setHeadOfHouse(jsonObj.getString("headOfHouse"));
         house.setHouseGhost(jsonObj.getString("houseGhost"));
         house.setFounder(jsonObj.getString("founder"));
+        // Format values from API into a String array
         house.setValues(jsonObj.getString("values").replaceAll("^\\[\"|\"\\]$", "").split("\",\""));
         house.setColors(jsonObj.getString("colors").replaceAll("^\\[\"|\"\\]$", "").split("\",\""));
     }

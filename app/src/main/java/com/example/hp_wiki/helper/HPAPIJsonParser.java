@@ -80,6 +80,5 @@ public class HPAPIJsonParser {
             person.setWand(wand);
         }
     }
-
 }
 
