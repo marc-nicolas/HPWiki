@@ -1,5 +1,11 @@
 package com.example.hp_wiki.model;
 
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import java.util.Date;
+
 public class Person  {
     private String name;
     private String species;
@@ -15,7 +21,6 @@ public class Person  {
     private String actor;
     private Boolean alive;
     private String image;
-
 
     public Person(String name, String species, String gender, String house, String dateOfBirth, String bloodStatus, String eyeColor, String hairColor, Wand wand, String patronus, String actor, Boolean alive, String image) {
         this.name = name;
@@ -121,7 +126,6 @@ public class Person  {
         this.patronus = patronus;
     }
 
-
     public String getRole() {
         return role;
     }
@@ -134,8 +138,11 @@ public class Person  {
         this.actor = actor;
     }
 
-    public Boolean getAlive() {
-        return alive;
+    public String getAlive() {
+        if(alive == true){
+            return "This character is still alive";
+        }
+        return "This character is dead";
     }
 
     public void setAlive(Boolean alive) {
@@ -151,5 +158,4 @@ public class Person  {
     public void setImage(String image) {
         this.image = image;
     }
-
 }

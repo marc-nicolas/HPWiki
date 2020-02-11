@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_characters"
-        android:name="com.example.hp_wiki.ui.characters.CharactersFragment"
+        android:name="com.example.hp_wiki.ui.persons.PersonsFragment"
         android:label="Characters"
         tools:layout="@layout/fragment_characters" />
 

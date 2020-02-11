@@ -3,19 +3,12 @@ package com.example.hp_wiki;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
-import android.app.DownloadManager;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -25,8 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.hp_wiki.R;
-import com.example.hp_wiki.helper.PotterAPIJsonParser;
+import com.example.hp_wiki.helper.HPAPIJsonParser;
 import com.example.hp_wiki.model.Person;
 import com.squareup.picasso.Picasso;
 
@@ -35,7 +27,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -58,6 +49,9 @@ public class PersonActivity extends AppCompatActivity {
     private TextView wood_info;
     private TextView wand;
     private TextView length_wand_info;
+    private TextView alive;
+    private TextView date_of_birth;
+    private TextView species;
     private static final String API_URL_HPAPI = "https://hp-api.herokuapp.com/api/characters";
 
     @Override
@@ -65,7 +59,7 @@ public class PersonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person);
         progressBar = findViewById(R.id.loading_person_details_progress);
-        setVariableCharacter();
+        setVariablePerson();
         Intent intent = getIntent();
         name = intent.getStringExtra("personName");
         setTitle(name);
@@ -77,7 +71,7 @@ public class PersonActivity extends AppCompatActivity {
         }
     }
 
-    private void setVariableCharacter(){
+    private void setVariablePerson(){
         bloodStatus = findViewById(R.id.blood);
         role = findViewById(R.id.role);
         house = findViewById(R.id.house);
@@ -94,9 +88,12 @@ public class PersonActivity extends AppCompatActivity {
         wood_info = findViewById(R.id.wood_info);
         wand = findViewById(R.id.wand);
         length_wand_info = findViewById(R.id.length_wand_info);
+        alive = findViewById(R.id.alive);
+        date_of_birth = findViewById(R.id.date_of_birth);
+        species = findViewById(R.id.species);
     }
 
-    private void setCharacterInfos(Person person){
+    private void setPersonInfos(Person person){
         bloodStatus.setText(person.getBloodStatus());
         role.setText(person.getRole());
         house.setText(person.getHouse());
@@ -105,6 +102,9 @@ public class PersonActivity extends AppCompatActivity {
         eye_color.setText(person.getEyeColor());
         actour.setText(person.getActor());
         gender.setText(person.getGender());
+        alive.setText(person.getAlive());
+        date_of_birth.setText(person.getDateOfBirth());
+        species.setText((person.getSpecies()));
         if(person.getWand() != null){
             wand.setText("WAND");
             core_info.setText("CORE");
@@ -112,7 +112,7 @@ public class PersonActivity extends AppCompatActivity {
             length_wand_info.setText("LENGTH");
             core.setText(person.getWand().getCore());
             wood.setText(person.getWand().getWood());
-            length_wand.setText(String.valueOf(person.getWand().getLength()) + " inch");
+            length_wand.setText(person.getWand().getLength() + " inch");
         }
         Picasso.get().load(person.getImage()).into(image);
     }
@@ -124,9 +124,9 @@ public class PersonActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
-                    Person person = PotterAPIJsonParser.createPersonFromJsonString(response, name);
+                    Person person = HPAPIJsonParser.createPersonFromJsonString(response, name);
                     progressBar.setVisibility(View.GONE);
-                    setCharacterInfos(person);
+                    setPersonInfos(person);
                 } catch (JSONException e) {
                     generateAlertDialog();
                 }
@@ -142,40 +142,6 @@ public class PersonActivity extends AppCompatActivity {
 
     private void generateAlertDialog() {
         Log.d("alert", "Could not get data.");
-    }
-
-    private List<Person> personJsonParser(String json) {
-
-        JSONArray jsonArray = null;
-        List<Person> persons = new ArrayList<>();
-
-        try {
-            jsonArray = new JSONArray(json);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        for(int i=0;i<jsonArray.length();i++){
-
-            JSONObject jsonObj = null;
-            Person person = null;
-            try {
-                jsonObj = jsonArray.getJSONObject(i);
-                person = new Person();
-                if (jsonObj.getString("name") != null) {
-                    person.setName(jsonObj.getString("name"));
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            if (person != null) {
-                persons.add(person);
-            }
-        }
-        Log.d("Testen", "Zum Testen");
-        return persons;
     }
 
     @Override

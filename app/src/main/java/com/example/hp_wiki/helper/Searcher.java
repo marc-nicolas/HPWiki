@@ -1,10 +1,5 @@
 package com.example.hp_wiki.helper;
 
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import com.example.hp_wiki.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
