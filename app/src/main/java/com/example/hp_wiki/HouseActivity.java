@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.hp_wiki.helper.Capitalisator;
 import com.example.hp_wiki.helper.HPAPIJsonParser;
 import com.example.hp_wiki.model.House;
 import com.example.hp_wiki.model.Person;
@@ -25,7 +26,12 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 
+import java.util.StringJoiner;
+
 public class HouseActivity extends AppCompatActivity {
+    private Capitalisator cap = new Capitalisator();
+
+    private static final String API_URL_HPAPI = "https://www.potterapi.com/v1/houses?key=$2a$10$cggq81VeZaQW/8j1bgQhc./UQfKWMSRxCBjBkSMz842XquC7pxiqO";
     private String name;
     private ProgressBar progressBar;
     private TextView mascot;
@@ -34,7 +40,6 @@ public class HouseActivity extends AppCompatActivity {
     private TextView founder;
     private TextView values;
     private TextView colors;
-    private static final String API_URL_HPAPI = "https://www.potterapi.com/v1/houses?key=$2a$10$cggq81VeZaQW/8j1bgQhc./UQfKWMSRxCBjBkSMz842XquC7pxiqO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +50,7 @@ public class HouseActivity extends AppCompatActivity {
         headOfHouse = findViewById(R.id.head_of_house);
         houseGhost = findViewById(R.id.house_ghost);
         founder = findViewById(R.id.founder);
-        values = findViewById(R.id.values;
+        values = findViewById(R.id.values);
         colors = findViewById(R.id.colors);
         Intent intent = getIntent();
         name = intent.getStringExtra("houseName");
@@ -65,18 +70,28 @@ public class HouseActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL_HPAPI, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                try {
-                    House house = HPAPIJsonParser.createHouseFromJsonString(response, name);
-                    progressBar.setVisibility(View.GONE);
-                    mascot.setText(house.getMascot());
-                    headOfHouse.setText(house.getHeadOfHouse());
-                    houseGhost.setText(house.getHouseGhost());
-                    founder.setText(house.getMascot());
-                    values.setText(house.getValues());
-                    colors.setText(house.getColors());
-                } catch (JSONException e) {
-                    generateAlertDialog();
+                House house = HPAPIJsonParser.createHouseFromJsonString(response, name);
+                progressBar.setVisibility(View.GONE);
+                mascot.setText(cap.capitalizeFirstLetter(house.getMascot()));
+                headOfHouse.setText(house.getHeadOfHouse());
+                houseGhost.setText(house.getHouseGhost());
+                founder.setText(house.getFounder());
+                String str = "";
+                for (String value : house.getValues()) {
+                    str += cap.capitalizeFirstLetter(value);
+                    if (value != house.getValues()[house.getValues().length-1]) {
+                        str += ", ";
+                    }
                 }
+                values.setText(str);
+                str = "";
+                for (String color : house.getColors()) {
+                    str += cap.capitalizeFirstLetter(color);
+                    if (color != house.getColors()[house.getColors().length-1]) {
+                        str += ", ";
+                    }
+                }
+                colors.setText(str);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -88,7 +103,7 @@ public class HouseActivity extends AppCompatActivity {
     }
 
     private void generateAlertDialog() {
-        Log.d("alert", "Could not get data.")
+        Log.d("alert", "Could not get data.");
     }
 
     @Override
