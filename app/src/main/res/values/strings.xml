@@ -15,6 +15,7 @@
     </string-array>
 
     <string-array name="house_array">
+        <item>House</item>
         <item>Gryffindor</item>
         <item>Hufflepuff</item>
         <item>Ravenclaw</item>
@@ -22,9 +23,10 @@
     </string-array>
 
     <string-array name="blood_array">
+        <item>Blood Status</item>
         <item>Half-blood</item>
         <item>Pure-blood</item>
-        <item>Muggle-born</item>
+        <item>Muggleborn</item>
         <item>Muggle</item>
         <item>Squib</item>
     </string-array>

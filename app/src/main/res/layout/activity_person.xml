@@ -52,7 +52,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="BLOOD STATUS"
+                            android:text="HAIR COLOR"
                             android:layout_marginBottom="5dp"/>
                         <TextView
                             android:layout_width="match_parent"
@@ -68,7 +68,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="ROLE"
+                            android:text="EYE COLOR"
                             android:layout_marginBottom="5dp"/>
                         <TextView
                             android:layout_width="match_parent"
@@ -85,13 +85,13 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="HOUSE"
+                            android:text="ACTOUR"
                             android:layout_marginBottom="5dp"/>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/acteur"
+                            android:id="@+id/actour"
                             android:layout_marginBottom="10dp"/>
                     </LinearLayout>
 
@@ -103,7 +103,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="PATRONUS"
+                            android:text="GENDER"
                             android:layout_marginBottom="5dp"/>
                         <TextView
                             android:layout_width="match_parent"

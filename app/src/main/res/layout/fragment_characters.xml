@@ -28,20 +28,19 @@
 
         <Spinner
             android:id="@+id/house_filters"
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:entries="@array/house_array"
             android:layout_marginTop="60dp"
-            android:layout_marginRight="200dp"
             android:spinnerMode="dropdown" />
+
         <Spinner
             android:id="@+id/blood_filters"
-            android:layout_width="match_parent"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:entries="@array/blood_array"
             android:layout_marginTop="60dp"
             android:spinnerMode="dropdown"
-            android:layout_marginLeft="200dp"
             android:layout_alignParentRight="true" />
 
         <ListView

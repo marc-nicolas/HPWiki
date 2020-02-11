@@ -228,4 +228,5 @@ public class Person  {
     public void setDeathEater(Boolean deathEater) {
         this.deathEater = deathEater;
     }
+
 }
