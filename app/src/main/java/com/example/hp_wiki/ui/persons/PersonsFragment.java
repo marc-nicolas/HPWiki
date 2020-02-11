@@ -1,4 +1,4 @@
-package com.example.hp_wiki.ui.characters;
+package com.example.hp_wiki.ui.persons;
 
 
 import android.content.Intent;
@@ -38,9 +38,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class CharactersFragment extends Fragment {
+public class PersonsFragment extends Fragment {
 
-    private CharactersViewModel charactersViewModel;
+    private PersonsViewModel personsViewModel;
 
     private Searcher searcher = new Searcher();
 
@@ -50,8 +50,8 @@ public class CharactersFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        charactersViewModel =
-                ViewModelProviders.of(this).get(CharactersViewModel.class);
+        personsViewModel =
+                ViewModelProviders.of(this).get(PersonsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_characters, container, false);
         addSearchListener(root);
         addHouseFilterListener(root);
@@ -151,7 +151,7 @@ public class CharactersFragment extends Fragment {
                 final ListView listView = getActivity().findViewById(R.id.personList);
 
                 ArrayAdapter<String> personAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
-                //personAdapter.addAll(charactersViewModel.getPersons(getContext()));
+                //personAdapter.addAll(personsViewModel.getPersons(getContext()));
 
                 personNames = new LinkedList<String>();
                 for (Person p: persons) {
