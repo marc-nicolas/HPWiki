@@ -41,6 +41,15 @@ public class HPAPIJsonParser {
     private static void setPerson(JSONObject jsonObj) throws JSONException {
         person = new Person();
         person.setName(jsonObj.getString("name"));
+        if(jsonObj.getBoolean("hogwartsStudent") == true || jsonObj.getBoolean("hogwartsStaff") == true){
+            if(jsonObj.getBoolean("hogwartsStudent") == true){
+                person.setRole("Student");
+            } else {
+                person.setRole("Hogwarts Staff");
+            }
+        } else {
+            person.setRole(" ");
+        }
         if(jsonObj.getString("species") != null){
             person.setSpecies(jsonObj.getString("species"));
         }
@@ -75,22 +84,18 @@ public class HPAPIJsonParser {
             person.setImage(jsonObj.getString("image"));
         }
         JSONObject wandJson = jsonObj.getJSONObject("wand");
-        Iterator keys = wandJson.keys();
-        while (keys.hasNext()) {
-            Wand wand = new Wand();
-            String key = (String) keys.next();
-            JSONObject subObj = wandJson.getJSONObject(key);
-            if(jsonObj.getString("wood") != null){
-                wand.setWood(jsonObj.getString("wood"));
-            }
-            if(jsonObj.getString("core") != null){
-                wand.setCore(jsonObj.getString("core"));
-            }
-            if(jsonObj.getInt("length") != 0){
-                wand.setLength(jsonObj.getInt("length"));
-            }
-            person.setWand(wand);
+        Wand wand = new Wand();
+        if(wandJson.getString("wood") != null){
+            wand.setWood(wandJson.getString("wood"));
         }
+        if(wandJson.getString("core") != null){
+            wand.setCore(wandJson.getString("core"));
+        }
+        if(wandJson.getInt("length") != 0){
+            wand.setLength(wandJson.getInt("length"));
+        }
+        person.setWand(wand);
+        Log.d("Wand", person.getWand().getCore());
     }
 
     public static House createHouseFromJsonString(String personJsonString, String name) {

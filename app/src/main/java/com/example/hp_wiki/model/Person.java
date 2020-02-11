@@ -1,17 +1,9 @@
 package com.example.hp_wiki.model;
 
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-
-import java.util.Date;
-
 public class Person  {
     private String name;
-    private String alias;
     private String species;
     private String gender;
-    private String school;
     private String house;
     private String dateOfBirth;
     private String bloodStatus;
@@ -19,25 +11,11 @@ public class Person  {
     private String hairColor;
     private Wand wand;
     private String patronus;
-    private String boggart;
     private String role;
     private String actor;
     private Boolean alive;
     private String image;
-    private Boolean ministryOfMagic;
-    private Boolean orderOfThePhoenix;
-    private Boolean dumbledoresArmy;
-    private Boolean deathEater;
 
-    public Person(String name, String species, String bloodStatus, Boolean ministryOfMagic, Boolean orderOfThePhoenix, Boolean dumbledoresArmy, Boolean deathEater) {
-        this.name = name;
-        this.species = species;
-        this.bloodStatus = bloodStatus;
-        this.ministryOfMagic = ministryOfMagic;
-        this.orderOfThePhoenix = orderOfThePhoenix;
-        this.dumbledoresArmy = dumbledoresArmy;
-        this.deathEater = deathEater;
-    }
 
     public Person(String name, String species, String gender, String house, String dateOfBirth, String bloodStatus, String eyeColor, String hairColor, Wand wand, String patronus, String actor, Boolean alive, String image) {
         this.name = name;
@@ -71,14 +49,6 @@ public class Person  {
         this.name = name;
     }
 
-    public String getAlias() {
-        return alias;
-    }
-
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
-
     public String getSpecies() {
         return species;
     }
@@ -93,14 +63,6 @@ public class Person  {
 
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public String getSchool() {
-        return school;
-    }
-
-    public void setSchool(String school) {
-        this.school = school;
     }
 
     public String getHouse() {
@@ -159,13 +121,6 @@ public class Person  {
         this.patronus = patronus;
     }
 
-    public String getBoggart() {
-        return boggart;
-    }
-
-    public void setBoggart(String boggart) {
-        this.boggart = boggart;
-    }
 
     public String getRole() {
         return role;
@@ -197,35 +152,4 @@ public class Person  {
         this.image = image;
     }
 
-    public Boolean getMinistryOfMagic() {
-        return ministryOfMagic;
-    }
-
-    public void setMinistryOfMagic(Boolean ministryOfMagic) {
-        this.ministryOfMagic = ministryOfMagic;
-    }
-
-    public Boolean getOrderOfThePhoenix() {
-        return orderOfThePhoenix;
-    }
-
-    public void setOrderOfThePhoenix(Boolean orderOfThePhoenix) {
-        this.orderOfThePhoenix = orderOfThePhoenix;
-    }
-
-    public Boolean getDumbledoresArmy() {
-        return dumbledoresArmy;
-    }
-
-    public void setDumbledoresArmy(Boolean dumbledoresArmy) {
-        this.dumbledoresArmy = dumbledoresArmy;
-    }
-
-    public Boolean getDeathEater() {
-        return deathEater;
-    }
-
-    public void setDeathEater(Boolean deathEater) {
-        this.deathEater = deathEater;
-    }
 }

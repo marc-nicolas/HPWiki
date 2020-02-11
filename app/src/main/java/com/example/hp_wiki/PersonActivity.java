@@ -38,6 +38,17 @@ public class PersonActivity extends AppCompatActivity {
     private TextView house;
     private TextView patronus;
     private ImageView image;
+    private TextView hair_color;
+    private TextView eye_color;
+    private TextView actour;
+    private TextView gender;
+    private TextView core;
+    private TextView wood;
+    private TextView length_wand;
+    private TextView core_info;
+    private TextView wood_info;
+    private TextView wand;
+    private TextView length_wand_info;
     private static final String API_URL_HPAPI = "https://hp-api.herokuapp.com/api/characters";
 
     @Override
@@ -45,11 +56,7 @@ public class PersonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person);
         progressBar = findViewById(R.id.loading_person_details_progress);
-        bloodStatus = findViewById(R.id.blood);
-        role = findViewById(R.id.role);
-        house = findViewById(R.id.house);
-        image = findViewById(R.id.image);
-        patronus = findViewById(R.id.patronus);
+        setVariableCharacter();
         Intent intent = getIntent();
         name = intent.getStringExtra("personName");
         setTitle(name);
@@ -61,6 +68,46 @@ public class PersonActivity extends AppCompatActivity {
         }
     }
 
+    private void setVariableCharacter(){
+        bloodStatus = findViewById(R.id.blood);
+        role = findViewById(R.id.role);
+        house = findViewById(R.id.house);
+        image = findViewById(R.id.image);
+        patronus = findViewById(R.id.patronus);
+        hair_color = findViewById(R.id.hair_color);
+        eye_color = findViewById(R.id.eye_color);
+        actour = findViewById(R.id.actour);
+        gender = findViewById(R.id.gender);
+        core = findViewById(R.id.core);
+        wood = findViewById(R.id.wood);
+        length_wand = findViewById(R.id.length_wand);
+        core_info = findViewById(R.id.core_info);
+        wood_info = findViewById(R.id.wood_info);
+        wand = findViewById(R.id.wand);
+        length_wand_info = findViewById(R.id.length_wand_info);
+    }
+
+    private void setCharacterInfos(Person person){
+        bloodStatus.setText(person.getBloodStatus());
+        role.setText(person.getRole());
+        house.setText(person.getHouse());
+        patronus.setText(person.getPatronus());
+        hair_color.setText(person.getHairColor());
+        eye_color.setText(person.getEyeColor());
+        actour.setText(person.getActor());
+        gender.setText(person.getGender());
+        if(person.getWand() != null){
+            wand.setText("WAND");
+            core_info.setText("CORE");
+            wood_info.setText("WOOD");
+            length_wand_info.setText("LENGTH");
+            core.setText(person.getWand().getCore());
+            wood.setText(person.getWand().getWood());
+            length_wand.setText(String.valueOf(person.getWand().getLength()) + " inch");
+        }
+        Picasso.get().load(person.getImage()).into(image);
+    }
+
     private void getPerson(){
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
@@ -70,11 +117,7 @@ public class PersonActivity extends AppCompatActivity {
                 try {
                     Person person = HPAPIJsonParser.createPersonFromJsonString(response, name);
                     progressBar.setVisibility(View.GONE);
-                    bloodStatus.setText(person.getBloodStatus());
-                    role.setText("Student");
-                    house.setText(person.getHouse());
-                    patronus.setText(person.getPatronus());
-                    Picasso.get().load(person.getImage()).into(image);
+                    setCharacterInfos(person);
                 } catch (JSONException e) {
                     generateAlertDialog();
                 }
@@ -109,27 +152,6 @@ public class PersonActivity extends AppCompatActivity {
             Person person = null;
             try {
                 jsonObj = jsonArray.getJSONObject(i);
-                //JSONObject wand = jsonObj.getJSONObject("wand");
-
-/*                person = new Person(
-                        jsonObj.getString("name"),
-                        jsonObj.getString("species"),
-                        jsonObj.getString("gender"),
-                        jsonObj.getString("house"),
-                        jsonObj.getString("dateOfBirth"),
-                        jsonObj.getString("ancestry"),
-                        jsonObj.getString("eyeColour"),
-                        jsonObj.getString("hairColour"),
-                        new Wand(
-                                wand.getString("wood"),
-                                wand.getString("core"),
-                                wand.getInt("length")
-                        ),
-                        jsonObj.getString("patronus"),
-                        jsonObj.getString("actor"),
-                        jsonObj.getBoolean("alive"),
-                        jsonObj.getString("image")
-                );*/
                 person = new Person();
                 if (jsonObj.getString("name") != null) {
                     person.setName(jsonObj.getString("name"));

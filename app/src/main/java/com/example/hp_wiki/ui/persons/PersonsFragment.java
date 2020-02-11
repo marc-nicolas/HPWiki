@@ -160,8 +160,6 @@ public class PersonsFragment extends Fragment {
 
                 personAdapter.addAll(personNames);
                 listView.setAdapter(personAdapter);
-
-
                 AdapterView.OnItemClickListener mListClickedHandler = new AdapterView.OnItemClickListener() {
                     public void onItemClick(AdapterView parent, View v, int position, long id ){
                         Intent intent = new Intent(getContext(), PersonActivity.class);
