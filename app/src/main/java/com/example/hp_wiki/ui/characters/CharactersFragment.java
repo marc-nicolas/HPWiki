@@ -1,7 +1,6 @@
 package com.example.hp_wiki.ui.characters;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -15,12 +14,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.android.volley.Request;
@@ -60,14 +56,6 @@ public class CharactersFragment extends Fragment {
         addSearchListener(root);
         addHouseFilterListener(root);
         addBloodFilterListener(root);
-
-        //final TextView textView = root.findViewById(R.id.text_characters);
-        charactersViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                //textView.setText(s);
-            }
-        });
 
         this.getCharacters();
 

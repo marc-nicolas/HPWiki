@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class PotterAPIJsonParser {
+public class HPAPIJsonParser {
     private static Person person;
 
     public static Person createPersonFromJsonString(String personJsonString, String name) throws JSONException {

@@ -3,19 +3,12 @@ package com.example.hp_wiki;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
-import android.app.DownloadManager;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -25,8 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.hp_wiki.R;
-import com.example.hp_wiki.helper.PotterAPIJsonParser;
+import com.example.hp_wiki.helper.HPAPIJsonParser;
 import com.example.hp_wiki.model.Person;
 import com.squareup.picasso.Picasso;
 
@@ -35,7 +27,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -77,7 +68,7 @@ public class PersonActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
-                    Person person = PotterAPIJsonParser.createPersonFromJsonString(response, name);
+                    Person person = HPAPIJsonParser.createPersonFromJsonString(response, name);
                     progressBar.setVisibility(View.GONE);
                     bloodStatus.setText(person.getBloodStatus());
                     role.setText("Student");
