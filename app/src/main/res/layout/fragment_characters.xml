@@ -11,7 +11,7 @@
         android:paddingRight="16dp" >
 
         <ImageButton
-            android:id="@+id/spells_search"
+            android:id="@+id/search_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -19,7 +19,7 @@
             android:src="@drawable/zoom_32" />
 
         <EditText
-            android:id="@+id/name"
+            android:id="@+id/search_characters"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"

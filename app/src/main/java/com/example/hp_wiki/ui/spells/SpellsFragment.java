@@ -1,11 +1,14 @@
 package com.example.hp_wiki.ui.spells;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hp_wiki.R;
+import com.example.hp_wiki.helper.Searcher;
 import com.example.hp_wiki.model.Spell;
 
 import org.json.JSONArray;
@@ -34,20 +38,47 @@ import java.util.List;
 
 public class SpellsFragment extends Fragment {
 
-    private SpellsViewModel spellsViewModel;
-
     private static final String API_URL_POTTERAPI = "https://www.potterapi.com/v1/spells?key=$2a$10$cggq81VeZaQW/8j1bgQhc./UQfKWMSRxCBjBkSMz842XquC7pxiqO";
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        spellsViewModel =
-                ViewModelProviders.of(this).get(SpellsViewModel.class);
+    private SpellsViewModel spellsViewModel;
+    private Searcher searcher = new Searcher();
+
+    private List<String> spellNames;
+
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        spellsViewModel = ViewModelProviders.of(this).get(SpellsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_spells, container, false);
 
-        this.getSpells();
+        getSpells();
+        addSearchListener(root);
+
         return root;
     }
 
+    private void addSearchListener(View root){
+        final EditText search = root.findViewById(R.id.search_spells);
+        search.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            public void afterTextChanged(Editable s) {
+                final ListView listView = getActivity().findViewById(R.id.spellList);
+                ArrayAdapter<String> spellAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
+                spellAdapter.addAll(searcher.search(spellNames, s.toString()));
+                listView.setAdapter(spellAdapter);
+            }
+        });
+    }
+
+    // Gets Spells from API
     private void getSpells() {
         RequestQueue queue = Volley.newRequestQueue(getActivity());
 
@@ -58,7 +89,7 @@ public class SpellsFragment extends Fragment {
                 final ListView listView = getActivity().findViewById(R.id.spellList);
 
                 ArrayAdapter<String> spellAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
-                List<String> spellNames = new LinkedList<String>();
+                spellNames = new LinkedList<String>();
                 for (Spell s: spells) {
                     spellNames.add(s.getName());
                 }
@@ -79,6 +110,7 @@ public class SpellsFragment extends Fragment {
         Log.d("alert", "Could not get data.");
     }
 
+    // Adds names of the Spells to a List
     private List<Spell> spellsJsonParser(String json) {
 
         JSONArray jsonArray = null;

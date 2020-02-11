@@ -29,14 +29,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hp_wiki.R;
+import com.example.hp_wiki.helper.Searcher;
 import com.example.hp_wiki.model.Person;
-import com.example.hp_wiki.model.Wand;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -44,6 +43,8 @@ import java.util.List;
 public class CharactersFragment extends Fragment {
 
     private CharactersViewModel charactersViewModel;
+
+    private Searcher searcher = new Searcher();
 
     private static final String API_URL_HPAPI = "https://hp-api.herokuapp.com/api/characters";
     private List<Person> persons = new ArrayList<>();
@@ -57,9 +58,9 @@ public class CharactersFragment extends Fragment {
         //charactersViewModel = new CharactersViewModel();
 
         View root = inflater.inflate(R.layout.fragment_characters, container, false);
-        afterSearch(root);
-        houseFilter(root);
-        bloodFilter(root);
+        addSearchListener(root);
+        addHouseFilterListener(root);
+        addBloodFilterListener(root);
 
         //final TextView textView = root.findViewById(R.id.text_characters);
         charactersViewModel.getText().observe(this, new Observer<String>() {
@@ -74,9 +75,8 @@ public class CharactersFragment extends Fragment {
         return root;
     }
 
-    private void afterSearch(View root){
-        final EditText search = root.findViewById(R.id.name);
-
+    private void addSearchListener(View root){
+        final EditText search = root.findViewById(R.id.search_characters);
         search.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -91,20 +91,14 @@ public class CharactersFragment extends Fragment {
 
             public void afterTextChanged(Editable s) {
                 final ListView listView = getActivity().findViewById(R.id.personList);
-                List<String> filteredList = new ArrayList<>();
-                for(String person : personNames){
-                    if (person.toLowerCase().contains(s.toString().toLowerCase())){
-                        filteredList.add(person);
-                    }
-                }
                 ArrayAdapter<String> personAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
-                personAdapter.addAll(filteredList);
+                personAdapter.addAll(searcher.search(personNames, s.toString()));
                 listView.setAdapter(personAdapter);
             }
         });
     }
 
-    private void houseFilter(View root){
+    private void addHouseFilterListener(View root){
         final Spinner houseFilter = root.findViewById(R.id.house_filters);
 
         houseFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -131,7 +125,7 @@ public class CharactersFragment extends Fragment {
         });
     }
 
-    private void bloodFilter(View root){
+    private void addBloodFilterListener(View root){
         final Spinner bloodFilter = root.findViewById(R.id.blood_filters);
 
         bloodFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
