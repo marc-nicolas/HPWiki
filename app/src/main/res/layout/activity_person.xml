@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="450dp"
                 android:scaleType="fitXY"
-                android:contentDescription="@string/title_home"
+                android:contentDescription="Picture of the Person"
                 android:id="@+id/image"
                 android:gravity="top"
                 />
@@ -36,7 +36,9 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="450dp">
+                android:layout_marginTop="450dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
 
                 <LinearLayout
                     android:layout_width="200dp"
@@ -53,6 +55,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="HAIR COLOR"
+                            android:textColor="#000000"
                             android:layout_marginBottom="5dp"/>
                         <TextView
                             android:layout_width="match_parent"
@@ -69,6 +72,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="EYE COLOR"
+                            android:textColor="#000000"
                             android:layout_marginBottom="5dp"/>
                         <TextView
                             android:layout_width="match_parent"
@@ -86,6 +90,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="ACTOUR"
+                            android:textColor="#000000"
                             android:layout_marginBottom="5dp"/>
 
                         <TextView
@@ -104,6 +109,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="GENDER"
+                            android:textColor="#000000"
                             android:layout_marginBottom="5dp"/>
                         <TextView
                             android:layout_width="match_parent"
@@ -130,6 +136,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="BLOOD STATUS"
+                            android:textColor="#000000"
                             android:layout_marginBottom="5dp"/>
                         <TextView
                             android:layout_width="match_parent"
@@ -146,6 +153,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="ROLE"
+                            android:textColor="#000000"
                             android:layout_marginBottom="5dp"/>
                         <TextView
                             android:layout_width="match_parent"
@@ -163,6 +171,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="HOUSE"
+                            android:textColor="#000000"
                             android:layout_marginBottom="5dp"/>
 
                         <TextView
@@ -181,6 +190,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="PATRONUS"
+                            android:textColor="#000000"
                             android:layout_marginBottom="5dp"/>
                         <TextView
                             android:layout_width="match_parent"
@@ -190,6 +200,95 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="330dp">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/black"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="20dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#000000"
+                            android:textSize="25dp"
+                            android:id="@+id/wand"/>
+
+                        <LinearLayout
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="30dp"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000000"
+                                    android:id="@+id/core_info"
+                                    android:layout_marginBottom="5dp"/>
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/core"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="30dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#000000"
+                                    android:id="@+id/wood_info"
+                                    android:layout_marginBottom="5dp"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/wood"
+                                    android:layout_marginBottom="10dp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="50dp">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="#000000"
+                                android:id="@+id/length_wand_info"
+                                android:layout_marginBottom="5dp"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/length_wand"
+                                android:layout_marginBottom="10dp"/>
+                        </LinearLayout>
+                    </RelativeLayout>
+                </RelativeLayout>
             </RelativeLayout>
         </RelativeLayout>
     </ScrollView>

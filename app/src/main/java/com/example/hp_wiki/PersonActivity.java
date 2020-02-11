@@ -51,6 +51,13 @@ public class PersonActivity extends AppCompatActivity {
     private TextView eye_color;
     private TextView actour;
     private TextView gender;
+    private TextView core;
+    private TextView wood;
+    private TextView length_wand;
+    private TextView core_info;
+    private TextView wood_info;
+    private TextView wand;
+    private TextView length_wand_info;
     private static final String API_URL_HPAPI = "https://hp-api.herokuapp.com/api/characters";
 
     @Override
@@ -80,17 +87,33 @@ public class PersonActivity extends AppCompatActivity {
         eye_color = findViewById(R.id.eye_color);
         actour = findViewById(R.id.actour);
         gender = findViewById(R.id.gender);
+        core = findViewById(R.id.core);
+        wood = findViewById(R.id.wood);
+        length_wand = findViewById(R.id.length_wand);
+        core_info = findViewById(R.id.core_info);
+        wood_info = findViewById(R.id.wood_info);
+        wand = findViewById(R.id.wand);
+        length_wand_info = findViewById(R.id.length_wand_info);
     }
 
     private void setCharacterInfos(Person person){
         bloodStatus.setText(person.getBloodStatus());
-        role.setText("Student");
+        role.setText(person.getRole());
         house.setText(person.getHouse());
         patronus.setText(person.getPatronus());
         hair_color.setText(person.getHairColor());
         eye_color.setText(person.getEyeColor());
         actour.setText(person.getActor());
         gender.setText(person.getGender());
+        if(person.getWand() != null){
+            wand.setText("WAND");
+            core_info.setText("CORE");
+            wood_info.setText("WOOD");
+            length_wand_info.setText("LENGTH");
+            core.setText(person.getWand().getCore());
+            wood.setText(person.getWand().getWood());
+            length_wand.setText(String.valueOf(person.getWand().getLength()) + " inch");
+        }
         Picasso.get().load(person.getImage()).into(image);
     }
 

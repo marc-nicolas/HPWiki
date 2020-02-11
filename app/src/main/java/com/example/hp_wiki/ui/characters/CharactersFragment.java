@@ -57,20 +57,10 @@ public class CharactersFragment extends Fragment {
         charactersViewModel =
                 ViewModelProviders.of(this).get(CharactersViewModel.class);
 
-        //charactersViewModel = new CharactersViewModel();
-
         View root = inflater.inflate(R.layout.fragment_characters, container, false);
         addSearchListener(root);
         addHouseFilterListener(root);
         addBloodFilterListener(root);
-
-        //final TextView textView = root.findViewById(R.id.text_characters);
-        charactersViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                //textView.setText(s);
-            }
-        });
 
         this.getCharacters();
 

@@ -1,5 +1,6 @@
 package com.example.hp_wiki.ui.spells;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -24,7 +26,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.hp_wiki.PersonActivity;
 import com.example.hp_wiki.R;
+import com.example.hp_wiki.SpellActivity;
 import com.example.hp_wiki.helper.Searcher;
 import com.example.hp_wiki.model.Spell;
 
@@ -96,6 +100,15 @@ public class SpellsFragment extends Fragment {
 
                 spellAdapter.addAll(spellNames);
                 listView.setAdapter(spellAdapter);
+                AdapterView.OnItemClickListener mListClickedHandler = new AdapterView.OnItemClickListener() {
+                    public void onItemClick(AdapterView parent, View v, int position, long id ){
+                        Intent intent = new Intent(getContext(), SpellActivity.class);
+                        String selected = (String)parent.getItemAtPosition(position);
+                        intent.putExtra("spellName", selected);
+                        startActivity(intent);
+                    }
+                };
+                listView.setOnItemClickListener(mListClickedHandler);
 
             }
         }, new Response.ErrorListener() {
