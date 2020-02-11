@@ -2,6 +2,7 @@ package com.example.hp_wiki.ui.characters;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -28,6 +29,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.hp_wiki.PersonActivity;
 import com.example.hp_wiki.R;
 import com.example.hp_wiki.helper.Searcher;
 import com.example.hp_wiki.model.Person;
@@ -54,9 +56,6 @@ public class CharactersFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         charactersViewModel =
                 ViewModelProviders.of(this).get(CharactersViewModel.class);
-
-        //charactersViewModel = new CharactersViewModel();
-
         View root = inflater.inflate(R.layout.fragment_characters, container, false);
         addSearchListener(root);
         addHouseFilterListener(root);
@@ -173,6 +172,16 @@ public class CharactersFragment extends Fragment {
                 personAdapter.addAll(personNames);
                 listView.setAdapter(personAdapter);
 
+
+                AdapterView.OnItemClickListener mListClickedHandler = new AdapterView.OnItemClickListener() {
+                    public void onItemClick(AdapterView parent, View v, int position, long id ){
+                        Intent intent = new Intent(getContext(), PersonActivity.class);
+                        String selected = (String)parent.getItemAtPosition(position);
+                        intent.putExtra("personName", selected);
+                        startActivity(intent);
+                    }
+                };
+                listView.setOnItemClickListener(mListClickedHandler);
             }
         }, new Response.ErrorListener() {
             @Override public void onErrorResponse(VolleyError error) {
