@@ -49,6 +49,9 @@ public class PersonActivity extends AppCompatActivity {
     private TextView wood_info;
     private TextView wand;
     private TextView length_wand_info;
+    private TextView alive;
+    private TextView date_of_birth;
+    private TextView species;
     private static final String API_URL_HPAPI = "https://hp-api.herokuapp.com/api/characters";
 
     @Override
@@ -85,6 +88,9 @@ public class PersonActivity extends AppCompatActivity {
         wood_info = findViewById(R.id.wood_info);
         wand = findViewById(R.id.wand);
         length_wand_info = findViewById(R.id.length_wand_info);
+        alive = findViewById(R.id.alive);
+        date_of_birth = findViewById(R.id.date_of_birth);
+        species = findViewById(R.id.species);
     }
 
     private void setPersonInfos(Person person) {
@@ -96,14 +102,17 @@ public class PersonActivity extends AppCompatActivity {
         eye_color.setText(person.getEyeColor());
         actour.setText(person.getActor());
         gender.setText(person.getGender());
-        if (person.getWand() != null) {
+        alive.setText(person.getAlive());
+        date_of_birth.setText(person.getDateOfBirth());
+        species.setText((person.getSpecies()));
+        if(person.getWand() != null){
             wand.setText("WAND");
             core_info.setText("CORE");
             wood_info.setText("WOOD");
             length_wand_info.setText("LENGTH");
             core.setText(person.getWand().getCore());
             wood.setText(person.getWand().getWood());
-            length_wand.setText(String.valueOf(person.getWand().getLength()) + " inch");
+            length_wand.setText(person.getWand().getLength() + " inch");
         }
         Picasso.get().load(person.getImage()).into(image);
     }
@@ -133,40 +142,6 @@ public class PersonActivity extends AppCompatActivity {
 
     private void generateAlertDialog() {
         Log.d("alert", "Could not get data.");
-    }
-
-    private List<Person> personJsonParser(String json) {
-
-        JSONArray jsonArray = null;
-        List<Person> persons = new ArrayList<>();
-
-        try {
-            jsonArray = new JSONArray(json);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        for (int i = 0; i < jsonArray.length(); i++) {
-
-            JSONObject jsonObj = null;
-            Person person = null;
-            try {
-                jsonObj = jsonArray.getJSONObject(i);
-                person = new Person();
-                if (jsonObj.getString("name") != null) {
-                    person.setName(jsonObj.getString("name"));
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            if (person != null) {
-                persons.add(person);
-            }
-        }
-        Log.d("Testen", "Zum Testen");
-        return persons;
     }
 
     @Override

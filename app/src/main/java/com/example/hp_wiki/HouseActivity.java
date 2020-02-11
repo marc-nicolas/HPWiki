@@ -71,7 +71,12 @@ public class HouseActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL_HPAPI, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                House house = PotterAPIJsonParser.createHouseFromJsonString(response, name);
+                House house = null;
+                try {
+                    house = PotterAPIJsonParser.createHouseFromJsonString(response, name);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 progressBar.setVisibility(View.GONE);
                 mascot.setText(cap.capitalizeFirstLetter(house.getMascot()));
                 headOfHouse.setText(house.getHeadOfHouse());

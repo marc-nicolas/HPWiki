@@ -5,6 +5,9 @@ public class Spell {
     private String type;
     private String effect;
 
+    public Spell() {
+    }
+
     public String getName() {
         return name;
     }

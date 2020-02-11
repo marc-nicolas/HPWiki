@@ -32,23 +32,14 @@ public class PotterAPIJsonParser {
         return spell;
     }
 
-    private static void setSpell(JSONObject jsonObj) throws JSONException {
-        spell = new Spell();
-        spell.setName(jsonObj.getString("spell"));
-        if (jsonObj.getString("type") != null)
-            spell.setEffect(jsonObj.getString("type"));
-        if (jsonObj.getString("effect") != null)
-            spell.setType(jsonObj.getString("effect"));
-    }
-
-    public static House createHouseFromJsonString(String personJsonString, String name) {
+    public static House createHouseFromJsonString(String houseJsonString, String name) throws JSONException {
         JSONArray jsonArray = null;
         try {
-            jsonArray = new JSONArray(personJsonString);
+            jsonArray = new JSONArray(houseJsonString);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        for (int i = 0; i < jsonArray.length(); i++) {
+        for(int i=0;i<jsonArray.length();i++) {
             try {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
                 if (jsonObj.getString("name").equals(name)) {
@@ -73,5 +64,16 @@ public class PotterAPIJsonParser {
         house.setValues(jsonObj.getString("values").replaceAll("^\\[\"|\"\\]$", "").split("\",\""));
         house.setColors(jsonObj.getString("colors").replaceAll("^\\[\"|\"\\]$", "").split("\",\""));
     }
-}
 
+
+    private static void setSpell(JSONObject jsonObj) throws JSONException {
+        spell = new Spell();
+        spell.setName(jsonObj.getString("spell"));
+        if(jsonObj.getString("type") != null){
+            spell.setEffect(jsonObj.getString("type"));
+        }
+        if(jsonObj.getString("effect") != null){
+            spell.setType(jsonObj.getString("effect"));
+        }
+    }
+}
