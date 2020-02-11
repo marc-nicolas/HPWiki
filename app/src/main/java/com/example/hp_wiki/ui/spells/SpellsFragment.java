@@ -24,7 +24,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.hp_wiki.PersonActivity;
 import com.example.hp_wiki.R;
 import com.example.hp_wiki.SpellActivity;
 import com.example.hp_wiki.helper.Searcher;

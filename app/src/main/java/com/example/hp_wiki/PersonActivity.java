@@ -105,14 +105,18 @@ public class PersonActivity extends AppCompatActivity {
         alive.setText(person.getAlive());
         date_of_birth.setText(person.getDateOfBirth());
         species.setText((person.getSpecies()));
-        if(person.getWand() != null){
+        if (person.getWand() != null) {
             wand.setText("WAND");
             core_info.setText("CORE");
             wood_info.setText("WOOD");
             length_wand_info.setText("LENGTH");
             core.setText(person.getWand().getCore());
             wood.setText(person.getWand().getWood());
-            length_wand.setText(person.getWand().getLength() + " inch");
+            if (person.getWand().getLength() > 0) {
+                length_wand.setText(person.getWand().getLength() + " inch");
+            } else {
+                length_wand.setText("Unknown");
+            }
         }
         Picasso.get().load(person.getImage()).into(image);
     }

@@ -46,7 +46,7 @@ public class HousesFragment extends Fragment {
         housesViewModel = ViewModelProviders.of(this).get(HousesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_houses, container, false);
 
-        this.getHouses();
+        getHouses();
         return root;
     }
 

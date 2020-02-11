@@ -70,7 +70,7 @@ public class HPAPIJsonParser {
             setWand(person, wand);
             wand.setCore(wandJson.getString("core"));
         }
-        if (wandJson.getInt("length") >= 0) {
+        if (wandJson.getInt("length") > 0) {
             setWand(person, wand);
             wand.setLength(wandJson.getInt("length"));
         }
