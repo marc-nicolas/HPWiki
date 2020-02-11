@@ -20,4 +20,12 @@ public class Spell {
     public void setType(String type) {
         this.type = type;
     }
+
+    public String getEffect() {
+        return effect;
+    }
+
+    public void setEffect(String effect) {
+        this.effect = effect;
+    }
 }
