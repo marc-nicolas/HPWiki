@@ -24,7 +24,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.hp_wiki.PersonActivity;
 import com.example.hp_wiki.R;
 import com.example.hp_wiki.SpellActivity;
 import com.example.hp_wiki.helper.Searcher;
@@ -59,7 +58,7 @@ public class SpellsFragment extends Fragment {
         return root;
     }
 
-    private void addSearchListener(View root){
+    private void addSearchListener(View root) {
         final EditText search = root.findViewById(R.id.search_spells);
         search.addTextChangedListener(new TextWatcher() {
 
@@ -82,7 +81,7 @@ public class SpellsFragment extends Fragment {
         });
     }
 
-    private void addTypeFilterListener(View root){
+    private void addTypeFilterListener(View root) {
         final Spinner spellFilter = root.findViewById(R.id.spell_filters);
 
         spellFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -91,11 +90,11 @@ public class SpellsFragment extends Fragment {
                 final ListView listView = getActivity().findViewById(R.id.spellList);
                 List<String> filteredList = new ArrayList<>();
 
-                for(int i = 0; i < spells.size(); i++){
-                    if(spellFilter.getSelectedItem().toString().equals("Type")){
+                for (int i = 0; i < spells.size(); i++) {
+                    if (spellFilter.getSelectedItem().toString().equals("Type")) {
                         filteredList = spellNames;
                     }
-                    if (spells.get(i).getType().equals(spellFilter.getSelectedItem().toString())){
+                    if (spells.get(i).getType().equals(spellFilter.getSelectedItem().toString())) {
                         filteredList.add(spellNames.get(i));
                     }
                 }
@@ -105,7 +104,8 @@ public class SpellsFragment extends Fragment {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parentView) {}
+            public void onNothingSelected(AdapterView<?> parentView) {
+            }
         });
     }
 
@@ -116,21 +116,21 @@ public class SpellsFragment extends Fragment {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL_POTTERAPI, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                List<Spell> spells =  spellsJsonParser(response);
+                List<Spell> spells = spellsJsonParser(response);
                 final ListView listView = getActivity().findViewById(R.id.spellList);
 
                 ArrayAdapter<String> spellAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
                 spellNames = new LinkedList<String>();
-                for (Spell s: spells) {
+                for (Spell s : spells) {
                     spellNames.add(s.getName());
                 }
 
                 spellAdapter.addAll(spellNames);
                 listView.setAdapter(spellAdapter);
                 AdapterView.OnItemClickListener mListClickedHandler = new AdapterView.OnItemClickListener() {
-                    public void onItemClick(AdapterView parent, View v, int position, long id ){
+                    public void onItemClick(AdapterView parent, View v, int position, long id) {
                         Intent intent = new Intent(getContext(), SpellActivity.class);
-                        String selected = (String)parent.getItemAtPosition(position);
+                        String selected = (String) parent.getItemAtPosition(position);
                         intent.putExtra("spellName", selected);
                         startActivity(intent);
                     }
@@ -139,7 +139,8 @@ public class SpellsFragment extends Fragment {
 
             }
         }, new Response.ErrorListener() {
-            @Override public void onErrorResponse(VolleyError error) {
+            @Override
+            public void onErrorResponse(VolleyError error) {
                 generateAlertDialog();
             }
         });
@@ -162,7 +163,7 @@ public class SpellsFragment extends Fragment {
             e.printStackTrace();
         }
 
-        for(int i=0;i<jsonArray.length();i++){
+        for (int i = 0; i < jsonArray.length(); i++) {
 
             JSONObject jsonObj = null;
             Spell spell = null;

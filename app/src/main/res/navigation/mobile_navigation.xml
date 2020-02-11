@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_characters">
+    app:startDestination="@+id/navigation_persons">
 
     <fragment
-        android:id="@+id/navigation_characters"
+        android:id="@+id/navigation_persons"
         android:name="com.example.hp_wiki.ui.persons.PersonsFragment"
-        android:label="Characters"
-        tools:layout="@layout/fragment_characters" />
+        android:label="Persons"
+        tools:layout="@layout/fragment_persons" />
 
     <fragment
         android:id="@+id/navigation_spells"

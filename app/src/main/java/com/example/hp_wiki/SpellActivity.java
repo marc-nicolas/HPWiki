@@ -17,9 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.hp_wiki.helper.HPAPIJsonParser;
 import com.example.hp_wiki.helper.PotterAPIJsonParser;
-import com.example.hp_wiki.model.Person;
 import com.example.hp_wiki.model.Spell;
 
 import org.json.JSONException;
@@ -48,17 +46,18 @@ public class SpellActivity extends AppCompatActivity {
         }
     }
 
-    private void setVariableSpell(){
+    private void setVariableSpell() {
         type = findViewById(R.id.type);
         effect = findViewById(R.id.effect);
     }
 
-    private void setSpellInfos(Spell spell){
+    private void setSpellInfos(Spell spell) {
         type.setText(spell.getType());
         effect.setText(spell.getEffect());
     }
 
-    private void getSpell(){
+    //Get the choosen spell from the spell API
+    private void getSpell() {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL_HPAPI, new Response.Listener<String>() {

@@ -80,7 +80,7 @@ public class HouseActivity extends AppCompatActivity {
                 String str = "";
                 for (String value : house.getValues()) {
                     str += cap.capitalizeFirstLetter(value);
-                    if (value != house.getValues()[house.getValues().length-1]) {
+                    if (value != house.getValues()[house.getValues().length - 1]) {
                         str += ", ";
                     }
                 }
@@ -88,7 +88,7 @@ public class HouseActivity extends AppCompatActivity {
                 str = "";
                 for (String color : house.getColors()) {
                     str += cap.capitalizeFirstLetter(color);
-                    if (color != house.getColors()[house.getColors().length-1]) {
+                    if (color != house.getColors()[house.getColors().length - 1]) {
                         str += ", ";
                     }
                 }

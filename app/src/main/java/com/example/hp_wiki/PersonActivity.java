@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.hp_wiki.helper.Capitalisator;
 import com.example.hp_wiki.helper.HPAPIJsonParser;
 import com.example.hp_wiki.model.Person;
 import com.squareup.picasso.Picasso;
@@ -52,6 +53,7 @@ public class PersonActivity extends AppCompatActivity {
     private TextView alive;
     private TextView date_of_birth;
     private TextView species;
+    private Capitalisator cap = new Capitalisator();
     private static final String API_URL_HPAPI = "https://hp-api.herokuapp.com/api/characters";
 
     @Override
@@ -71,7 +73,7 @@ public class PersonActivity extends AppCompatActivity {
         }
     }
 
-    private void setVariablePerson(){
+    private void setVariablePerson() {
         bloodStatus = findViewById(R.id.blood);
         role = findViewById(R.id.role);
         house = findViewById(R.id.house);
@@ -93,31 +95,48 @@ public class PersonActivity extends AppCompatActivity {
         species = findViewById(R.id.species);
     }
 
-    private void setPersonInfos(Person person){
-        bloodStatus.setText(person.getBloodStatus());
-        role.setText(person.getRole());
-        house.setText(person.getHouse());
-        patronus.setText(person.getPatronus());
-        hair_color.setText(person.getHairColor());
-        eye_color.setText(person.getEyeColor());
-        actour.setText(person.getActor());
-        gender.setText(person.getGender());
+    private void setPersonInfos(Person person) {
+        bloodStatus.setText(isEmpty(person.getBloodStatus()));
+        role.setText(isEmpty(person.getRole()));
+        house.setText(isEmpty(person.getHouse()));
+        patronus.setText(isEmpty(person.getPatronus()));
+        hair_color.setText(isEmpty(person.getHairColor()));
+        eye_color.setText(isEmpty(person.getEyeColor()));
+        actour.setText(isEmpty(person.getActor()));
+        gender.setText(isEmpty(person.getGender()));
         alive.setText(person.getAlive());
-        date_of_birth.setText(person.getDateOfBirth());
-        species.setText((person.getSpecies()));
-        if(person.getWand() != null){
+        date_of_birth.setText(isEmpty(person.getDateOfBirth()));
+        species.setText(isEmpty(person.getSpecies()));
+        if (person.getWand() != null) {
             wand.setText("WAND");
             core_info.setText("CORE");
             wood_info.setText("WOOD");
             length_wand_info.setText("LENGTH");
-            core.setText(person.getWand().getCore());
-            wood.setText(person.getWand().getWood());
-            length_wand.setText(person.getWand().getLength() + " inch");
+            core.setText(isEmpty(person.getWand().getCore()));
+            wood.setText(isEmpty(person.getWand().getWood()));
+            length_wand.setText(isEmpty(person.getWand().getLength()));
         }
         Picasso.get().load(person.getImage()).into(image);
     }
 
-    private void getPerson(){
+    private String isEmpty(String text) {
+        if (text.equals("")) {
+            return "Unknown";
+        } else {
+            return cap.capitalizeFirstLetter(text);
+        }
+    }
+
+    private String isEmpty(int number) {
+        if (number == 0) {
+            return "Unknown";
+        } else {
+            return number + " inch";
+        }
+    }
+
+    //Get the current person from the character API
+    private void getPerson() {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL_HPAPI, new Response.Listener<String>() {

@@ -6,8 +6,8 @@ import java.util.List;
 public class Searcher {
     public List<String> search(List<String> list, String query) {
         List<String> filteredList = new ArrayList<>();
-        for(String listItem : list){
-            if (listItem.toLowerCase().contains(query.toLowerCase())){
+        for (String listItem : list) {
+            if (listItem.toLowerCase().contains(query.toLowerCase())) {
                 filteredList.add(listItem);
             }
         }

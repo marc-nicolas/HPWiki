@@ -9,12 +9,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.android.volley.Request;
@@ -24,7 +21,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hp_wiki.HouseActivity;
-import com.example.hp_wiki.PersonActivity;
 import com.example.hp_wiki.R;
 import com.example.hp_wiki.model.House;
 
@@ -58,12 +54,12 @@ public class HousesFragment extends Fragment {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL_POTTERAPI, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                List<House> houses =  housesJsonParser(response);
+                List<House> houses = housesJsonParser(response);
                 final ListView listView = getActivity().findViewById(R.id.houseList);
 
                 ArrayAdapter<String> houseAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
                 List<String> houseNames = new LinkedList<String>();
-                for (House h: houses) {
+                for (House h : houses) {
                     houseNames.add(h.getName());
                 }
 
@@ -71,9 +67,9 @@ public class HousesFragment extends Fragment {
                 listView.setAdapter(houseAdapter);
 
                 AdapterView.OnItemClickListener mListClickedHandler = new AdapterView.OnItemClickListener() {
-                    public void onItemClick(AdapterView parent, View v, int position, long id ){
+                    public void onItemClick(AdapterView parent, View v, int position, long id) {
                         Intent intent = new Intent(getContext(), HouseActivity.class);
-                        String selected = (String)parent.getItemAtPosition(position);
+                        String selected = (String) parent.getItemAtPosition(position);
                         intent.putExtra("houseName", selected);
                         startActivity(intent);
                     }
@@ -81,7 +77,8 @@ public class HousesFragment extends Fragment {
                 listView.setOnItemClickListener(mListClickedHandler);
             }
         }, new Response.ErrorListener() {
-            @Override public void onErrorResponse(VolleyError error) {
+            @Override
+            public void onErrorResponse(VolleyError error) {
                 generateAlertDialog();
             }
         });
@@ -103,7 +100,7 @@ public class HousesFragment extends Fragment {
             e.printStackTrace();
         }
 
-        for(int i=0;i<jsonArray.length();i++){
+        for (int i = 0; i < jsonArray.length(); i++) {
 
             JSONObject jsonObj = null;
             House house = null;

@@ -1,7 +1,5 @@
 package com.example.hp_wiki.helper;
 
-
-import com.example.hp_wiki.model.House;
 import com.example.hp_wiki.model.Person;
 import com.example.hp_wiki.model.Wand;
 
@@ -9,14 +7,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 public class HPAPIJsonParser {
     private static Person person;
-    private static House house;
 
+    //Get current person from person API
     public static Person createPersonFromJsonString(String personJsonString, String name) throws JSONException {
         JSONArray jsonArray = null;
         try {
@@ -38,9 +32,12 @@ public class HPAPIJsonParser {
         return person;
     }
 
+
     private static void setPerson(JSONObject jsonObj) throws JSONException {
         person = new Person();
         person.setName(jsonObj.getString("name"));
+        //If the hogwartsStudent or the hogwartsStaff is equal true
+        // the character is a student or a hogwarts staff
         if (jsonObj.getBoolean("hogwartsStudent") == true || jsonObj.getBoolean("hogwartsStaff") == true) {
             if (jsonObj.getBoolean("hogwartsStudent") == true) {
                 person.setRole("Student");
@@ -48,7 +45,7 @@ public class HPAPIJsonParser {
                 person.setRole("Hogwarts Staff");
             }
         } else {
-            person.setRole(" ");
+            person.setRole("Unknow");
         }
         person.setSpecies(jsonObj.getString("species"));
         person.setGender(jsonObj.getString("gender"));
@@ -71,12 +68,13 @@ public class HPAPIJsonParser {
             setWand(person, wand);
             wand.setCore(wandJson.getString("core"));
         }
-        if (wandJson.getInt("length") >= 0) {
+        if (wandJson.getInt("length") > 0) {
             setWand(person, wand);
             wand.setLength(wandJson.getInt("length"));
         }
     }
 
+    //assign the wand to the person
     private static void setWand(Person person, Wand wand) {
         if (person.getWand() == null) {
             person.setWand(wand);
