@@ -39,6 +39,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="MASCOT"
+                            android:textColor="#000000"
                             android:layout_marginBottom="5dp"/>
                         <TextView
                             android:layout_width="match_parent"
@@ -55,6 +56,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="HEAD OF HOUSE"
+                            android:textColor="#000000"
                             android:layout_marginBottom="5dp"/>
                         <TextView
                             android:layout_width="match_parent"
@@ -72,6 +74,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="HOUSE GHHOST"
+                            android:textColor="#000000"
                             android:layout_marginBottom="5dp"/>
 
                         <TextView
@@ -90,6 +93,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="FOUNDER"
+                            android:textColor="#000000"
                             android:layout_marginBottom="5dp"/>
                         <TextView
                             android:layout_width="match_parent"
@@ -107,6 +111,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="VALUES"
+                            android:textColor="#000000"
                             android:layout_marginBottom="5dp"/>
                         <TextView
                             android:layout_width="match_parent"
@@ -124,6 +129,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="COLORS"
+                            android:textColor="#000000"
                             android:layout_marginBottom="5dp"/>
                         <TextView
                             android:layout_width="match_parent"

@@ -95,7 +95,6 @@ public class HPAPIJsonParser {
         person.setWand(wand);
     }
 
-    /*
     public static House createHouseFromJsonString(String personJsonString, String name) {
         JSONArray jsonArray = null;
         try {
@@ -115,61 +114,17 @@ public class HPAPIJsonParser {
             }
         }
         return house;
-    }*/
+    }
 
-    /*private static void setHouse(JSONObject jsonObj) throws JSONException {
+    private static void setHouse(JSONObject jsonObj) throws JSONException {
         house = new House();
-        person.setName(jsonObj.getString("name"));
-        if(jsonObj.getString("species") != null){
-            person.setSpecies(jsonObj.getString("species"));
-        }
-        if(jsonObj.getString("gender") != null){
-            person.setGender(jsonObj.getString("gender"));
-        }
-        if(jsonObj.getString("house") != null){
-            person.setHouse(jsonObj.getString("house"));
-        }
-        if(jsonObj.getString("dateOfBirth") != null){
-            person.setDateOfBirth(jsonObj.getString("dateOfBirth"));
-        }
-        if(jsonObj.getString("ancestry") != null){
-            person.setBloodStatus(jsonObj.getString("ancestry"));
-        }
-        if(jsonObj.getString("eyeColour") != null){
-            person.setEyeColor(jsonObj.getString("eyeColour"));
-        }
-        if(jsonObj.getString("hairColour") != null){
-            person.setHairColor(jsonObj.getString("hairColour"));
-        }
-        if(jsonObj.getString("patronus") != null){
-            person.setPatronus(jsonObj.getString("patronus"));
-        }
-        if(jsonObj.getString("actor") != null){
-            person.setActor(jsonObj.getString("actor"));
-        }
-        if(jsonObj.getBoolean("alive")){
-            person.setAlive(jsonObj.getBoolean("alive"));
-        }
-        if(jsonObj.getString("image") != null){
-            person.setImage(jsonObj.getString("image"));
-        }
-        JSONObject wandJson = jsonObj.getJSONObject("wand");
-        Iterator keys = wandJson.keys();
-        while (keys.hasNext()) {
-            Wand wand = new Wand();
-            String key = (String) keys.next();
-            JSONObject subObj = wandJson.getJSONObject(key);
-            if(jsonObj.getString("wood") != null){
-                wand.setWood(jsonObj.getString("wood"));
-            }
-            if(jsonObj.getString("core") != null){
-                wand.setCore(jsonObj.getString("core"));
-            }
-            if(jsonObj.getInt("length") != 0){
-                wand.setLength(jsonObj.getInt("length"));
-            }
-            person.setWand(wand);
-        }
-    }*/
+        house.setName(jsonObj.getString("name"));
+        house.setMascot(jsonObj.getString("mascot"));
+        house.setHeadOfHouse(jsonObj.getString("headOfHouse"));
+        house.setHouseGhost(jsonObj.getString("houseGhost"));
+        house.setFounder(jsonObj.getString("founder"));
+        house.setValues(jsonObj.getString("values").replaceAll("^\\[\"|\"\\]$", "").split("\",\""));
+        house.setColors(jsonObj.getString("colors").replaceAll("^\\[\"|\"\\]$", "").split("\",\""));
+    }
 }
 
