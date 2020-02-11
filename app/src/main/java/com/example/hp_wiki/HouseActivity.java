@@ -20,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hp_wiki.helper.Capitalisator;
 import com.example.hp_wiki.helper.HPAPIJsonParser;
+import com.example.hp_wiki.helper.PotterAPIJsonParser;
 import com.example.hp_wiki.model.House;
 import com.example.hp_wiki.model.Person;
 import com.squareup.picasso.Picasso;
@@ -70,7 +71,7 @@ public class HouseActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL_HPAPI, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                House house = HPAPIJsonParser.createHouseFromJsonString(response, name);
+                House house = PotterAPIJsonParser.createHouseFromJsonString(response, name);
                 progressBar.setVisibility(View.GONE);
                 mascot.setText(cap.capitalizeFirstLetter(house.getMascot()));
                 headOfHouse.setText(house.getHeadOfHouse());

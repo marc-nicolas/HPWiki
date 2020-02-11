@@ -83,36 +83,5 @@ public class HPAPIJsonParser {
         }
     }
 
-    public static House createHouseFromJsonString(String personJsonString, String name) {
-        JSONArray jsonArray = null;
-        try {
-            jsonArray = new JSONArray(personJsonString);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        for (int i = 0; i < jsonArray.length(); i++) {
-            try {
-                JSONObject jsonObj = jsonArray.getJSONObject(i);
-                if (jsonObj.getString("name").equals(name)) {
-                    setHouse(jsonObj);
-                    break;
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        return house;
-    }
-
-    private static void setHouse(JSONObject jsonObj) throws JSONException {
-        house = new House();
-        house.setName(jsonObj.getString("name"));
-        house.setMascot(jsonObj.getString("mascot"));
-        house.setHeadOfHouse(jsonObj.getString("headOfHouse"));
-        house.setHouseGhost(jsonObj.getString("houseGhost"));
-        house.setFounder(jsonObj.getString("founder"));
-        house.setValues(jsonObj.getString("values").replaceAll("^\\[\"|\"\\]$", "").split("\",\""));
-        house.setColors(jsonObj.getString("colors").replaceAll("^\\[\"|\"\\]$", "").split("\",\""));
-    }
 }
 
