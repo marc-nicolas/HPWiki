@@ -2,19 +2,16 @@ package com.example.hp_wiki.ui.houses;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.android.volley.Request;
@@ -24,8 +21,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hp_wiki.HouseActivity;
-import com.example.hp_wiki.PersonActivity;
 import com.example.hp_wiki.R;
+import com.example.hp_wiki.SortingHatActivity;
 import com.example.hp_wiki.helper.ErrorHandler;
 import com.example.hp_wiki.model.House;
 
@@ -46,6 +43,14 @@ public class HousesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         housesViewModel = ViewModelProviders.of(this).get(HousesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_houses, container, false);
+        final Button button = root.findViewById(R.id.sorting_hat);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+                Intent intent = new Intent(getContext(), SortingHatActivity.class);
+                startActivity(intent);
+            }
+        });
 
         getHouses();
         return root;
@@ -91,7 +96,6 @@ public class HousesFragment extends Fragment {
     private void generateAlertDialog() {
         ErrorHandler errorHandler = new ErrorHandler(getActivity());
         errorHandler.alertApiError();
-        Log.d("alert", "Could not get data.");
     }
 
     private List<House> housesJsonParser(String json) {
@@ -125,7 +129,6 @@ public class HousesFragment extends Fragment {
                 houses.add(house);
             }
         }
-        Log.d("Testen", "Zum Testen");
         return houses;
     }
 

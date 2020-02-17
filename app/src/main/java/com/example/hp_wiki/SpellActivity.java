@@ -60,6 +60,7 @@ public class SpellActivity extends AppCompatActivity {
         effect.setText(cap.capitalizeFirstLetter(spell.getEffect()));
     }
 
+    //Get the choosen spell from the spell API
     private void getSpell() {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
@@ -86,7 +87,6 @@ public class SpellActivity extends AppCompatActivity {
     private void generateAlertDialog() {
         ErrorHandler errorHandler = new ErrorHandler(this);
         errorHandler.alertApiError();
-        Log.d("alert", "Could not get data.");
     }
 
     @Override

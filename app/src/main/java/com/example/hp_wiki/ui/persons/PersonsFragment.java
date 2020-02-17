@@ -37,17 +37,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 public class PersonsFragment extends Fragment {
 
     private PersonsViewModel personsViewModel;
-
-    private String activeHouse = "House";
-    private String activeBloodStatus = "Blood Status";
 
     private Searcher searcher = new Searcher();
 
@@ -88,37 +83,6 @@ public class PersonsFragment extends Fragment {
                 ArrayAdapter<String> personAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
                 personAdapter.addAll(searcher.search(personNames, s.toString()));
                 listView.setAdapter(personAdapter);
-/*                final ListView listView = getActivity().findViewById(R.id.personList);
-
-                List<String> filteredList = new ArrayList<>();
-                List<String> searchedList = searcher.search(personNames, s.toString());
-
-                for (int i = 0; i < searchedList.size(); i++) {
-                    if (activeHouse.equals("House") && activeBloodStatus.equals("Blood Status")) {
-                        filteredList = searchedList;
-                    } else {
-                        for (int j = 0; j < persons.size(); j++) {
-                            if (persons.get(j).getName().equals(searchedList.get(i))) {
-                                if (activeHouse.equals("House") && !activeBloodStatus.equals("Blood Status")) {
-                                    if (persons.get(j).getBloodStatus().equals(activeBloodStatus)) {
-                                        filteredList.add(searchedList.get(i));
-                                    }
-                                } else if (!activeHouse.equals("House") && activeBloodStatus.equals("Blood Status")) {
-                                    if (persons.get(j).getHouse().equals(activeHouse)) {
-                                        filteredList.add(searchedList.get(i));
-                                    }
-                                } else {
-                                    if (persons.get(j).getHouse().equals(activeHouse) && persons.get(j).getBloodStatus().equals(activeBloodStatus)) {
-                                        filteredList.add(searchedList.get(i));
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                ArrayAdapter<String> personAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
-                listView.setAdapter(personAdapter);
-                personAdapter.addAll(filteredList);*/
             }
         });
     }
@@ -129,13 +93,15 @@ public class PersonsFragment extends Fragment {
         houseFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                activeHouse = houseFilter.getSelectedItem().toString();
                 final ListView listView = getActivity().findViewById(R.id.personList);
                 List<String> filteredList = new ArrayList<>();
 
                 for (int i = 0; i < persons.size(); i++) {
-                    if (houseFilter.getSelectedItem().toString().equals("House")) {
+                    if (houseFilter.getSelectedItem().toString().equals("All Houses")) {
                         filteredList = personNames;
+                    }
+                    if (persons.get(i).getHouse().equals("") && houseFilter.getSelectedItem().toString().equals("No House")) {
+                        filteredList.add(personNames.get(i));
                     }
                     if (persons.get(i).getHouse().equals(houseFilter.getSelectedItem().toString())) {
                         filteredList.add(personNames.get(i));
@@ -158,7 +124,6 @@ public class PersonsFragment extends Fragment {
         bloodFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                activeBloodStatus = bloodFilter.getSelectedItem().toString();
                 final ListView listView = getActivity().findViewById(R.id.personList);
                 List<String> filteredList = new ArrayList<>();
 
@@ -192,7 +157,6 @@ public class PersonsFragment extends Fragment {
                 final ListView listView = getActivity().findViewById(R.id.personList);
 
                 ArrayAdapter<String> personAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
-                //personAdapter.addAll(personsViewModel.getPersons(getContext()));
 
                 personNames = new LinkedList<String>();
                 for (Person p : persons) {
@@ -223,7 +187,6 @@ public class PersonsFragment extends Fragment {
     private void generateAlertDialog() {
         ErrorHandler errorHandler = new ErrorHandler(getActivity());
         errorHandler.alertApiError();
-        Log.d("alert", "Could not get data.");
     }
 
     // Adds names of the Persons to a List
@@ -237,23 +200,15 @@ public class PersonsFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         for (int i = 0; i < jsonArray.length(); i++) {
-
             JSONObject jsonObj = null;
             Person person = null;
             try {
                 jsonObj = jsonArray.getJSONObject(i);
                 person = new Person();
-                if (jsonObj.getString("name") != null) {
-                    person.setName(jsonObj.getString("name"));
-                }
-                if (jsonObj.getString("house") != null) {
-                    person.setHouse(jsonObj.getString("house"));
-                }
-                if (jsonObj.getString("ancestry") != null) {
-                    person.setBloodStatus(jsonObj.getString("ancestry"));
-                }
+                person.setName(jsonObj.getString("name"));
+                person.setHouse(jsonObj.getString("house"));
+                person.setBloodStatus(jsonObj.getString("ancestry"));
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -263,7 +218,6 @@ public class PersonsFragment extends Fragment {
                 persons.add(person);
             }
         }
-        Log.d("Testen", "Zum Testen");
         return persons;
     }
 }

@@ -18,18 +18,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.hp_wiki.helper.Capitalizor;
 import com.example.hp_wiki.helper.ErrorHandler;
 import com.example.hp_wiki.helper.HPAPIJsonParser;
 import com.example.hp_wiki.model.Person;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class PersonActivity extends AppCompatActivity {
     private String name;
@@ -53,6 +48,7 @@ public class PersonActivity extends AppCompatActivity {
     private TextView alive;
     private TextView date_of_birth;
     private TextView species;
+    private Capitalizor cap = new Capitalizor();
     private static final String API_URL_HPAPI = "https://hp-api.herokuapp.com/api/characters";
 
     @Override
@@ -95,46 +91,55 @@ public class PersonActivity extends AppCompatActivity {
     }
 
     private void setPersonInfos(Person person) {
-        bloodStatus.setText(person.getBloodStatus());
-        role.setText(person.getRole());
-        house.setText(person.getHouse());
-        patronus.setText(person.getPatronus());
-        hair_color.setText(person.getHairColor());
-        eye_color.setText(person.getEyeColor());
-        actour.setText(person.getActor());
-        gender.setText(person.getGender());
+        bloodStatus.setText(isEmpty(person.getBloodStatus()));
+        role.setText(isEmpty(person.getRole()));
+        house.setText(isEmpty(person.getHouse()));
+        patronus.setText(isEmpty(person.getPatronus()));
+        hair_color.setText(isEmpty(person.getHairColor()));
+        eye_color.setText(isEmpty(person.getEyeColor()));
+        actour.setText(isEmpty(person.getActor()));
+        gender.setText(isEmpty(person.getGender()));
         alive.setText(person.getAlive());
-        date_of_birth.setText(person.getDateOfBirth());
-        species.setText((person.getSpecies()));
+        date_of_birth.setText(isEmpty(person.getDateOfBirth()));
+        species.setText(isEmpty(person.getSpecies()));
         if (person.getWand() != null) {
             wand.setText("WAND");
             core_info.setText("CORE");
             wood_info.setText("WOOD");
             length_wand_info.setText("LENGTH");
-            core.setText(person.getWand().getCore());
-            wood.setText(person.getWand().getWood());
-            if (person.getWand().getLength() > 0) {
-                length_wand.setText(person.getWand().getLength() + " inch");
-            } else {
-                length_wand.setText("Unknown");
-            }
+            core.setText(isEmpty(person.getWand().getCore()));
+            wood.setText(isEmpty(person.getWand().getWood()));
+            length_wand.setText(isEmpty(person.getWand().getLength()));
         }
         Picasso.get().load(person.getImage()).into(image);
     }
 
+    private String isEmpty(String text) {
+        if (text.isEmpty()) {
+            return "Unknown";
+        } else {
+            return cap.capitalizeFirstLetter(text);
+        }
+    }
+
+    private String isEmpty(int number) {
+        if (number == 0) {
+            return "Unknown";
+        } else {
+            return number + " inch";
+        }
+    }
+
+    //Get the current person from the character API
     private void getPerson() {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL_HPAPI, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                try {
-                    Person person = HPAPIJsonParser.createPersonFromJsonString(response, name);
-                    progressBar.setVisibility(View.GONE);
-                    setPersonInfos(person);
-                } catch (JSONException e) {
-                    generateAlertDialog();
-                }
+                Person person = HPAPIJsonParser.createPersonFromJsonString(response, name);
+                progressBar.setVisibility(View.GONE);
+                setPersonInfos(person);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -148,18 +153,15 @@ public class PersonActivity extends AppCompatActivity {
     private void generateAlertDialog() {
         ErrorHandler errorHandler = new ErrorHandler(this);
         errorHandler.alertApiError();
-        Log.d("alert", "Could not get data.");
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
 }

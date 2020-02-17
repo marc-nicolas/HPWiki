@@ -10,7 +10,8 @@ import org.json.JSONObject;
 public class HPAPIJsonParser {
     private static Person person;
 
-    public static Person createPersonFromJsonString(String personJsonString, String name) throws JSONException {
+    //Get current person from person API
+    public static Person createPersonFromJsonString(String personJsonString, String name) {
         JSONArray jsonArray = null;
         try {
             jsonArray = new JSONArray(personJsonString);
@@ -31,9 +32,12 @@ public class HPAPIJsonParser {
         return person;
     }
 
+
     private static void setPerson(JSONObject jsonObj) throws JSONException {
         person = new Person();
         person.setName(jsonObj.getString("name"));
+        //If the hogwartsStudent or the hogwartsStaff is equal true
+        // the character is a student or a hogwarts staff
         if (jsonObj.getBoolean("hogwartsStudent") || jsonObj.getBoolean("hogwartsStaff")) {
             if (jsonObj.getBoolean("hogwartsStudent")) {
                 person.setRole("Student");
@@ -41,7 +45,7 @@ public class HPAPIJsonParser {
                 person.setRole("Hogwarts Staff");
             }
         } else {
-            person.setRole(" ");
+            person.setRole("Unknow");
         }
         person.setSpecies(jsonObj.getString("species"));
         person.setGender(jsonObj.getString("gender"));
@@ -70,6 +74,7 @@ public class HPAPIJsonParser {
         }
     }
 
+    //assign the wand to the person
     private static void setWand(Person person, Wand wand) {
         if (person.getWand() == null) {
             person.setWand(wand);

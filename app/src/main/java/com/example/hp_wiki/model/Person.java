@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 
 import java.util.Date;
 
-public class Person  {
+public class Person {
     private String name;
     private String species;
     private String gender;
@@ -123,7 +123,7 @@ public class Person  {
     }
 
     public String getAlive() {
-        if(alive == true){
+        if (alive == true) {
             return "This character is still alive";
         }
         return "This character is dead";

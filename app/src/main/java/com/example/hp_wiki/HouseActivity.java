@@ -67,11 +67,7 @@ public class HouseActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 House house = null;
-                try {
-                    house = PotterAPIJsonParser.createHouseFromJsonString(response, name);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                house = PotterAPIJsonParser.createHouseFromJsonString(response, name);
                 progressBar.setVisibility(View.GONE);
                 mascot.setText(cap.capitalizeFirstLetter(house.getMascot()));
                 headOfHouse.setText(house.getHeadOfHouse());
@@ -106,17 +102,14 @@ public class HouseActivity extends AppCompatActivity {
     private void generateAlertDialog() {
         ErrorHandler errorHandler = new ErrorHandler(this);
         errorHandler.alertApiError();
-        Log.d("alert", "Could not get data.");
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 }

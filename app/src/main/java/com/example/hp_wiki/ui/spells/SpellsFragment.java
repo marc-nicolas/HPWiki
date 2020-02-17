@@ -151,7 +151,6 @@ public class SpellsFragment extends Fragment {
     private void generateAlertDialog() {
         ErrorHandler errorHandler = new ErrorHandler(getActivity());
         errorHandler.alertApiError();
-        Log.d("alert", "Could not get data.");
     }
 
     // Adds names of the Spells to a List

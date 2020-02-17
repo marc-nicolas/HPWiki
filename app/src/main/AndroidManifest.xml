@@ -12,8 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HouseActivity"></activity>
-        <activity android:name=".SpellActivity"></activity>
+        <activity android:name=".SortingHatActivity"></activity>
+        <activity android:name=".HouseActivity" />
+        <activity android:name=".SpellActivity" />
         <activity android:name=".PersonActivity" />
         <activity
             android:name=".MainActivity"
