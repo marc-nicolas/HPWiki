@@ -1,3 +1,122 @@
 <resources>
     <string name="app_name">HP-Wiki</string>
+    <string name="title_activity_bottom_navigation">HP-Wiki</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="question_1">1. Which of the following describes the ideal owl?</string>
+    <string name="question_2">2. Which of the following describes the ideal house?</string>
+    <string name="question_3">3. What would be the ideal resolution to a Wizard\'s Duel in the Dueling Club?</string>
+    <string name="question_4">4. Which of the following groups of Bertie Bott\'s flavors do you prefer the most?</string>
+    <string name="question_5">5. Which of the following best describes your ideal vacation?</string>
+    <string name="question_6">6. Someone you\'re not attracted to asks you to the Halloween Party tomorrow.  What would you do?</string>
+    <string name="question_7">7. What kind of job would you ideally like to have after you graduate from Hogwarts?</string>
+    <string name="question_8">8. You have a Potions test, a Quidditch match, and a Wizard\'s Duel this Friday. How would you prepare?</string>
+    <string name="question_9">9. In addition to your spell books, what type of books and wizard movies do you usually prefer?</string>
+    <string name="question_10">10. A member of another house has been spreading rumors about you. What would you do?</string>
+    <string name="question_11">11. You\'ve won a shopping spree on Diagon Alley. Which of the following lists of items would you choose?</string>
+
+    <string-array name="spells_array">
+        <item>Type</item>
+        <item>Charm</item>
+        <item>Curse</item>
+        <item>Enchantment</item>
+        <item>Hex</item>
+        <item>Jinx</item>
+        <item>Spell</item>
+    </string-array>
+
+    <string-array name="house_array">
+        <item>All Houses</item>
+        <item>No House</item>
+        <item>Gryffindor</item>
+        <item>Hufflepuff</item>
+        <item>Ravenclaw</item>
+        <item>Slytherin</item>
+    </string-array>
+
+    <string-array name="blood_array">
+        <item>Blood Status</item>
+        <item>Half-blood</item>
+        <item>Pure-blood</item>
+        <item>Muggleborn</item>
+        <item>Squib</item>
+    </string-array>
+
+    <string-array name="question1_array">
+        <item>Sleek, silent, powerful, and pedigreed, with the papers to prove it </item>
+        <item>Swift, bold, energetic, and agile, with no fear of foreign lands</item>
+        <item>Sharp-eyed, intelligent, disciplined, and observant, with a superior sense of direction</item>
+        <item>Gentle, reliable, easy-going, and affectionate, with a longer than average lifespan</item>
+    </string-array>
+
+    <string-array name="question2_array">
+        <item>A two-story cottage with a self-tending gnomeless garden, a swimming pool, a sun deck, and friendly neighbors</item>
+        <item>A castle overlooking the sea, with a drawbridge, miles of underground tunnels, a lake, and an enchanted forest</item>
+        <item>A Victorian home in the cultural district, with a library, a magic ballroom, spiral staircases, and a view of the park</item>
+        <item>A country manor with house elves, stables, a private Quidditch field, and a stone wall around the entire property</item>
+    </string-array>
+
+    <string-array name="question3_array">
+        <item>An honorable, painless duel that ends in a draw, a friendly handshake, and increased mutual respect</item>
+        <item>A decisive victory over an unworthy and unprepared opponent from another House, followed by uproarious applause</item>
+        <item>An exciting, competitive duel with a well-matched opponent, whom you finally defeat and disarm with flair</item>
+        <item>A perfectly executed series of difficult charms which earns you a high score and your teachers\' admiration</item>
+    </string-array>
+
+    <string-array name="question4_array">
+        <item>Sizzling cinnamon, pumpkin pie, tangy lemon-lime, ginger fizz, bubble gum</item>
+        <item>Chilled champagne, candied almonds, espresso, cherry cordial, devil\'s food cake</item>
+        <item>Banana pudding, apple pie, milk chocolate, root beer float, peaches and cream</item>
+        <item>Crême brulée, mint julep, carrot cake, white chocolate, strawberry-mango medley</item>
+    </string-array>
+
+    <string-array name="question5_array">
+        <item>Scuba diving at the Great Barrier Reef, hiking in the Grand Canyon, and volcano exploring in Hawaii</item>
+        <item>Skiing in the Swiss Alps, shopping in Paris, and cruising the Mediterranean aboard the QE2</item>
+        <item>Swimming with dolphins in the Caribbean, sunbathing on Mexican beaches, and vacationing at Disneyworld</item>
+        <item>Touring the castles of France, exploring Roman ruins, and taking a culinary tour of Tuscany</item>
+    </string-array>
+
+    <string-array name="question6_array">
+        <item>Refuse politely, explaining that you\'re not going because you have to study for a Charms test</item>
+        <item>Accept because the party sounds cool, and it doesn\'t really matter who you go with anyway</item>
+        <item>Refuse politely but without offering any explanation, then go to the party on your own</item>
+        <item>Accept because you don\'t want to hurt this person\'s feelings, but ask a friend to meet you there</item>
+    </string-array>
+
+    <string-array name="question7_array">
+        <item>Gringotts Curse Breaker, Professional Quidditch Player, or Auror</item>
+        <item>Daily Prophet Editor, Hogwarts Professor, or Wizard Defense Attorney</item>
+        <item>Unicorn Specialist, Leaky Cauldron Owner, or Qwikspell Teacher</item>
+        <item>Minister of Magic, Gringotts President, or Private Wizarding Consultant</item>
+    </string-array>
+
+    <string-array name="question8_array">
+        <item>Assign priorities to each and organize your study/preparation schedule accordingly</item>
+        <item>Spend time preparing for the one that\'s most important to you personally, and forget the others</item>
+        <item>Pretend to work equally hard on all three, but spend most your time on the one that offers the most House points</item>
+        <item>Hang out with your friends all week, then cram for all three the night before</item>
+    </string-array>
+
+    <string-array name="question9_array">
+        <item>Drama, romance, historical fiction, foreign films, and the classics</item>
+        <item>Horror, mystery, satire, gothic, and psychological dramas</item>
+        <item>Comedy, animated, nature, comic books, and self-help</item>
+        <item>Action-adventure, sci-fi, fantasy, martial arts, and westerns</item>
+    </string-array>
+
+    <string-array name="question10_array">
+        <item>Get back at him by casting a Drooling Curse or a Sour Armpit Spell on him when his back is turned</item>
+        <item>Confront him, challenging him to a wizard\'s duel or a broomstick race if he doesn\'t apologize publicly</item>
+        <item>Report him to a prefect or professor, and request a peer trial or magical mediation</item>
+        <item>Hang out with large groups of friends in the corridors, avoiding him whenever possible</item>
+    </string-array>
+
+    <string-array name="question11_array">
+        <item>Quick-Quotes Quill, Pensieve, Siamese cat, hat with a magically illuminated study light, charm bracelet</item>
+        <item>Foe Glass, Secret Diary, Italian greyhound, hooded velvet robe with expandable hidden pockets, power amulet</item>
+        <item>Remembrall, Self-Spell Check Pen, Scottish terrier, self-warming cotton bath robe, protective talisman</item>
+        <item>Wizard Chess Set, disappearing ink, chameleon, dragon hide boots with dragon claw cleats, singing sunglasses</item>
+    </string-array>
 </resources>

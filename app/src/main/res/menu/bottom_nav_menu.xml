@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_persons"
+        android:icon="@drawable/profil"
+        android:title="Persons" />
+
+    <item
+        android:id="@+id/navigation_spells"
+        android:icon="@drawable/wand"
+        android:title="Spells" />
+
+    <item
+        android:id="@+id/navigation_houses"
+        android:icon="@drawable/shield"
+        android:title="Houses" />
+
+</menu>
