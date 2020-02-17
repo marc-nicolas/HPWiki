@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hp_wiki.HouseActivity;
 import com.example.hp_wiki.R;
+import com.example.hp_wiki.SortingHatActivity;
 import com.example.hp_wiki.model.House;
 
 import org.json.JSONArray;
@@ -41,6 +43,14 @@ public class HousesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         housesViewModel = ViewModelProviders.of(this).get(HousesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_houses, container, false);
+        final Button button = root.findViewById(R.id.sorting_hat);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+                Intent intent = new Intent(getContext(), SortingHatActivity.class);
+                startActivity(intent);
+            }
+        });
 
         getHouses();
         return root;
