@@ -1,17 +1,11 @@
 package com.example.hp_wiki.helper;
 
-
-import com.example.hp_wiki.model.House;
 import com.example.hp_wiki.model.Person;
 import com.example.hp_wiki.model.Wand;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class HPAPIJsonParser {
     private static Person person;
@@ -40,8 +34,8 @@ public class HPAPIJsonParser {
     private static void setPerson(JSONObject jsonObj) throws JSONException {
         person = new Person();
         person.setName(jsonObj.getString("name"));
-        if (jsonObj.getBoolean("hogwartsStudent") == true || jsonObj.getBoolean("hogwartsStaff") == true) {
-            if (jsonObj.getBoolean("hogwartsStudent") == true) {
+        if (jsonObj.getBoolean("hogwartsStudent") || jsonObj.getBoolean("hogwartsStaff")) {
+            if (jsonObj.getBoolean("hogwartsStudent")) {
                 person.setRole("Student");
             } else {
                 person.setRole("Hogwarts Staff");

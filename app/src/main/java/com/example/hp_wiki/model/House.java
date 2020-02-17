@@ -6,7 +6,6 @@ public class House {
     private String headOfHouse;
     private String houseGhost;
     private String founder;
-    private String school;
     private String[] values;
     private String[] colors;
 
@@ -48,14 +47,6 @@ public class House {
 
     public void setFounder(String founder) {
         this.founder = founder;
-    }
-
-    public String getSchool() {
-        return school;
-    }
-
-    public void setSchool(String school) {
-        this.school = school;
     }
 
     public String[] getValues() {

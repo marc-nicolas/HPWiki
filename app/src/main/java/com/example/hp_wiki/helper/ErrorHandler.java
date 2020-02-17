@@ -10,6 +10,7 @@ public class ErrorHandler {
         this.activity = activity;
     }
 
+    // This alert is called when there was a problem with the API
     public void alertApiError() {
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(activity);
         builder.setTitle("API connection failed");
@@ -24,6 +25,7 @@ public class ErrorHandler {
         alertDialog.show();
     }
 
+    // This alert is called when there is no internet connection from the client
     public void alertInternetError() {
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(activity);
         builder.setTitle("No Internet Connection");
