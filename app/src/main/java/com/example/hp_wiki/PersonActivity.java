@@ -18,7 +18,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.hp_wiki.helper.Capitalisator;
+import com.example.hp_wiki.helper.Capitalizor;
+import com.example.hp_wiki.helper.ErrorHandler;
 import com.example.hp_wiki.helper.HPAPIJsonParser;
 import com.example.hp_wiki.model.Person;
 import com.squareup.picasso.Picasso;
@@ -53,7 +54,7 @@ public class PersonActivity extends AppCompatActivity {
     private TextView alive;
     private TextView date_of_birth;
     private TextView species;
-    private Capitalisator cap = new Capitalisator();
+    private Capitalizor cap = new Capitalizor();
     private static final String API_URL_HPAPI = "https://hp-api.herokuapp.com/api/characters";
 
     @Override
@@ -160,6 +161,8 @@ public class PersonActivity extends AppCompatActivity {
     }
 
     private void generateAlertDialog() {
+        ErrorHandler errorHandler = new ErrorHandler(this);
+        errorHandler.alertApiError();
         Log.d("alert", "Could not get data.");
     }
 

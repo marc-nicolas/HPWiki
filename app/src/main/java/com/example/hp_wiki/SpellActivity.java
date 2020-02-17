@@ -17,6 +17,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.hp_wiki.helper.Capitalizor;
+import com.example.hp_wiki.helper.ErrorHandler;
 import com.example.hp_wiki.helper.PotterAPIJsonParser;
 import com.example.hp_wiki.model.Spell;
 
@@ -28,6 +30,8 @@ public class SpellActivity extends AppCompatActivity {
     private TextView type;
     private TextView effect;
     private static final String API_URL_HPAPI = "https://www.potterapi.com/v1/spells?key=$2a$10$cggq81VeZaQW/8j1bgQhc./UQfKWMSRxCBjBkSMz842XquC7pxiqO";
+
+    public Capitalizor cap = new Capitalizor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +56,8 @@ public class SpellActivity extends AppCompatActivity {
     }
 
     private void setSpellInfos(Spell spell) {
-        type.setText(spell.getType());
-        effect.setText(spell.getEffect());
+        type.setText(cap.capitalizeFirstLetter(spell.getType()));
+        effect.setText(cap.capitalizeFirstLetter(spell.getEffect()));
     }
 
     //Get the choosen spell from the spell API
@@ -81,18 +85,18 @@ public class SpellActivity extends AppCompatActivity {
     }
 
     private void generateAlertDialog() {
+        ErrorHandler errorHandler = new ErrorHandler(this);
+        errorHandler.alertApiError();
         Log.d("alert", "Could not get data.");
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 }
 

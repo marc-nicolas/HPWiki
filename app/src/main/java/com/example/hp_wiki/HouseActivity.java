@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -18,19 +17,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.hp_wiki.helper.Capitalisator;
-import com.example.hp_wiki.helper.HPAPIJsonParser;
+import com.example.hp_wiki.helper.Capitalizor;
+import com.example.hp_wiki.helper.ErrorHandler;
 import com.example.hp_wiki.helper.PotterAPIJsonParser;
 import com.example.hp_wiki.model.House;
-import com.example.hp_wiki.model.Person;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 
-import java.util.StringJoiner;
-
 public class HouseActivity extends AppCompatActivity {
-    private Capitalisator cap = new Capitalisator();
+    private Capitalizor cap = new Capitalizor();
 
     private static final String API_URL_HPAPI = "https://www.potterapi.com/v1/houses?key=$2a$10$cggq81VeZaQW/8j1bgQhc./UQfKWMSRxCBjBkSMz842XquC7pxiqO";
     private String name;
@@ -105,6 +100,8 @@ public class HouseActivity extends AppCompatActivity {
     }
 
     private void generateAlertDialog() {
+        ErrorHandler errorHandler = new ErrorHandler(this);
+        errorHandler.alertApiError();
         Log.d("alert", "Could not get data.");
     }
 

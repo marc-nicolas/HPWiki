@@ -33,13 +33,6 @@ public class PotterAPIJsonParser {
         return spell;
     }
 
-    private static void setSpell(JSONObject jsonObj) throws JSONException {
-        spell = new Spell();
-        spell.setName(jsonObj.getString("spell"));
-        spell.setEffect(jsonObj.getString("type"));
-        spell.setType(jsonObj.getString("effect"));
-    }
-
     public static House createHouseFromJsonString(String personJsonString, String name) {
         JSONArray jsonArray = null;
         try {
@@ -71,6 +64,18 @@ public class PotterAPIJsonParser {
         // Format values from API into a String array
         house.setValues(jsonObj.getString("values").replaceAll("^\\[\"|\"\\]$", "").split("\",\""));
         house.setColors(jsonObj.getString("colors").replaceAll("^\\[\"|\"\\]$", "").split("\",\""));
+    }
+
+
+    private static void setSpell(JSONObject jsonObj) throws JSONException {
+        spell = new Spell();
+        spell.setName(jsonObj.getString("spell"));
+        if(jsonObj.getString("type") != null){
+            spell.setType(jsonObj.getString("type"));
+        }
+        if(jsonObj.getString("effect") != null){
+            spell.setEffect(jsonObj.getString("effect"));
+        }
     }
 }
 

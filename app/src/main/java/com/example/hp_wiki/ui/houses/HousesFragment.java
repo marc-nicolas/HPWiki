@@ -24,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.hp_wiki.HouseActivity;
 import com.example.hp_wiki.R;
 import com.example.hp_wiki.SortingHatActivity;
+import com.example.hp_wiki.helper.ErrorHandler;
 import com.example.hp_wiki.model.House;
 
 import org.json.JSONArray;
@@ -94,6 +95,8 @@ public class HousesFragment extends Fragment {
     }
 
     private void generateAlertDialog() {
+        ErrorHandler errorHandler = new ErrorHandler(getActivity());
+        errorHandler.alertApiError();
         Log.d("alert", "Could not get data.");
     }
 
