@@ -44,11 +44,11 @@
                     <Spinner
                         android:id="@+id/question_1"
                         style="@style/SpinnerDropDownItem"
-                        android:layout_width="180dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:entries="@array/question1_array"
-                        android:spinnerMode="dropdown"/>
+                        android:spinnerMode="dialog" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -65,11 +65,11 @@
                     <Spinner
                         android:id="@+id/question_2"
                         style="@style/SpinnerDropDownItem"
-                        android:layout_width="180dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:entries="@array/question2_array"
-                        android:spinnerMode="dropdown" />
+                        android:spinnerMode="dialog" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -86,11 +86,11 @@
                     <Spinner
                         android:id="@+id/question_3"
                         style="@style/SpinnerDropDownItem"
-                        android:layout_width="180dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:entries="@array/question3_array"
-                        android:spinnerMode="dropdown" />
+                        android:spinnerMode="dialog" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -107,11 +107,11 @@
                     <Spinner
                         android:id="@+id/question_4"
                         style="@style/SpinnerDropDownItem"
-                        android:layout_width="180dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:entries="@array/question4_array"
-                        android:spinnerMode="dropdown" />
+                        android:spinnerMode="dialog" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -128,11 +128,11 @@
                     <Spinner
                         android:id="@+id/question_5"
                         style="@style/SpinnerDropDownItem"
-                        android:layout_width="180dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:entries="@array/question5_array"
-                        android:spinnerMode="dropdown" />
+                        android:spinnerMode="dialog" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -149,11 +149,11 @@
                     <Spinner
                         android:id="@+id/question_6"
                         style="@style/SpinnerDropDownItem"
-                        android:layout_width="180dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:entries="@array/question6_array"
-                        android:spinnerMode="dropdown" />
+                        android:spinnerMode="dialog" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -170,11 +170,11 @@
                     <Spinner
                         android:id="@+id/question_7"
                         style="@style/SpinnerDropDownItem"
-                        android:layout_width="180dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:entries="@array/question7_array"
-                        android:spinnerMode="dropdown" />
+                        android:spinnerMode="dialog" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -191,11 +191,11 @@
                     <Spinner
                         android:id="@+id/question_8"
                         style="@style/SpinnerDropDownItem"
-                        android:layout_width="180dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:entries="@array/question8_array"
-                        android:spinnerMode="dropdown" />
+                        android:spinnerMode="dialog" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -212,11 +212,11 @@
                     <Spinner
                         android:id="@+id/question_9"
                         style="@style/SpinnerDropDownItem"
-                        android:layout_width="180dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:entries="@array/question9_array"
-                        android:spinnerMode="dropdown" />
+                        android:spinnerMode="dialog" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -233,11 +233,11 @@
                     <Spinner
                         android:id="@+id/question_10"
                         style="@style/SpinnerDropDownItem"
-                        android:layout_width="180dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:entries="@array/question10_array"
-                        android:spinnerMode="dropdown" />
+                        android:spinnerMode="dialog" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -254,11 +254,11 @@
                     <Spinner
                         android:id="@+id/question_11"
                         style="@style/SpinnerDropDownItem"
-                        android:layout_width="180dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:entries="@array/question11_array"
-                        android:spinnerMode="dropdown" />
+                        android:spinnerMode="dialog" />
                 </LinearLayout>
 
                 <Button

@@ -32,7 +32,6 @@ public class HPAPIJsonParser {
         return person;
     }
 
-
     private static void setPerson(JSONObject jsonObj) throws JSONException {
         person = new Person();
         person.setName(jsonObj.getString("name"));
@@ -64,14 +63,17 @@ public class HPAPIJsonParser {
             setWand(person, wand);
             wand.setWood(wandJson.getString("wood"));
         }
+        if (wandJson.getString("wood").equals("")) {
+            wand.setCore("Unknow");
+        }
         if (!wandJson.getString("core").equals("")) {
             setWand(person, wand);
             wand.setCore(wandJson.getString("core"));
         }
-        if (wandJson.getInt("length") > 0) {
-            setWand(person, wand);
-            wand.setLength(wandJson.getInt("length"));
+        if (wandJson.getString("core").equals("")) {
+            wand.setCore("Unknow");
         }
+        wand.setLength(wandJson.getInt("length"));
     }
 
     //assign the wand to the person

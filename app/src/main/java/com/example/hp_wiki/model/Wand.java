@@ -4,7 +4,7 @@ public class Wand {
     private String wood;
     private String core;
     private int length;
-
+    
     public Wand() {
     }
 
