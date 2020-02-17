@@ -105,6 +105,7 @@ public class PersonsFragment extends Fragment {
                                     }
                                 } else if (!activeHouse.equals("House") && activeBloodStatus.equals("Blood Status")) {
                                     if (persons.get(j).getHouse().equals(activeHouse)) {
+                                        filteredList.add(searchedList.get(i));
                                     }
                                 } else {
                                     if (persons.get(j).getHouse().equals(activeHouse) && persons.get(j).getBloodStatus().equals(activeBloodStatus)) {
