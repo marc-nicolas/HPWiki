@@ -95,8 +95,11 @@ public class PersonsFragment extends Fragment {
                 List<String> filteredList = new ArrayList<>();
 
                 for (int i = 0; i < persons.size(); i++) {
-                    if (houseFilter.getSelectedItem().toString().equals("House")) {
+                    if (houseFilter.getSelectedItem().toString().equals("All Houses")) {
                         filteredList = personNames;
+                    }
+                    if (persons.get(i).getHouse().equals("") && houseFilter.getSelectedItem().toString().equals("No House")){
+                        filteredList.add(personNames.get(i));
                     }
                     if (persons.get(i).getHouse().equals(houseFilter.getSelectedItem().toString())) {
                         filteredList.add(personNames.get(i));

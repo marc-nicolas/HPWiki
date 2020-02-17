@@ -16,7 +16,8 @@
     </string-array>
 
     <string-array name="house_array">
-        <item>House</item>
+        <item>All Houses</item>
+        <item>No House</item>
         <item>Gryffindor</item>
         <item>Hufflepuff</item>
         <item>Ravenclaw</item>
