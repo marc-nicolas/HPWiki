@@ -22,22 +22,6 @@ public class Person  {
     private Boolean alive;
     private String image;
 
-    public Person(String name, String species, String gender, String house, String dateOfBirth, String bloodStatus, String eyeColor, String hairColor, Wand wand, String patronus, String actor, Boolean alive, String image) {
-        this.name = name;
-        this.species = species;
-        this.gender = gender;
-        this.house = house;
-        this.dateOfBirth = dateOfBirth;
-        this.bloodStatus = bloodStatus;
-        this.eyeColor = eyeColor;
-        this.hairColor = hairColor;
-        this.wand = wand;
-        this.patronus = patronus;
-        this.actor = actor;
-        this.alive = alive;
-        this.image = image;
-    }
-
     public Person() {
 
     }

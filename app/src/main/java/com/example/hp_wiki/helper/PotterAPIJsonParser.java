@@ -70,10 +70,10 @@ public class PotterAPIJsonParser {
         spell = new Spell();
         spell.setName(jsonObj.getString("spell"));
         if(jsonObj.getString("type") != null){
-            spell.setEffect(jsonObj.getString("type"));
+            spell.setType(jsonObj.getString("type"));
         }
         if(jsonObj.getString("effect") != null){
-            spell.setType(jsonObj.getString("effect"));
+            spell.setEffect(jsonObj.getString("effect"));
         }
     }
 }

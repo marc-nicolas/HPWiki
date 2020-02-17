@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.hp_wiki.helper.ErrorHandler;
 import com.example.hp_wiki.helper.HPAPIJsonParser;
 import com.example.hp_wiki.model.Person;
 import com.squareup.picasso.Picasso;
@@ -145,6 +146,8 @@ public class PersonActivity extends AppCompatActivity {
     }
 
     private void generateAlertDialog() {
+        ErrorHandler errorHandler = new ErrorHandler(this);
+        errorHandler.alertApiError();
         Log.d("alert", "Could not get data.");
     }
 

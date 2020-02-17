@@ -25,8 +25,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.hp_wiki.MainActivity;
 import com.example.hp_wiki.PersonActivity;
 import com.example.hp_wiki.R;
+import com.example.hp_wiki.helper.ErrorHandler;
 import com.example.hp_wiki.helper.Searcher;
 import com.example.hp_wiki.model.Person;
 
@@ -43,6 +45,9 @@ import java.util.List;
 public class PersonsFragment extends Fragment {
 
     private PersonsViewModel personsViewModel;
+
+    private String activeHouse = "House";
+    private String activeBloodStatus = "Blood Status";
 
     private Searcher searcher = new Searcher();
 
@@ -64,7 +69,7 @@ public class PersonsFragment extends Fragment {
         return root;
     }
 
-    private void addSearchListener(View root) {
+    private void addSearchListener(final View root) {
         final EditText search = root.findViewById(R.id.search_persons);
         search.addTextChangedListener(new TextWatcher() {
 
@@ -83,6 +88,36 @@ public class PersonsFragment extends Fragment {
                 ArrayAdapter<String> personAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
                 personAdapter.addAll(searcher.search(personNames, s.toString()));
                 listView.setAdapter(personAdapter);
+/*                final ListView listView = getActivity().findViewById(R.id.personList);
+
+                List<String> filteredList = new ArrayList<>();
+                List<String> searchedList = searcher.search(personNames, s.toString());
+
+                for (int i = 0; i < searchedList.size(); i++) {
+                    if (activeHouse.equals("House") && activeBloodStatus.equals("Blood Status")) {
+                        filteredList = searchedList;
+                    } else {
+                        for (int j = 0; j < persons.size(); j++) {
+                            if (persons.get(j).getName().equals(searchedList.get(i))) {
+                                if (activeHouse.equals("House") && !activeBloodStatus.equals("Blood Status")) {
+                                    if (persons.get(j).getBloodStatus().equals(activeBloodStatus)) {
+                                        filteredList.add(searchedList.get(i));
+                                    }
+                                } else if (!activeHouse.equals("House") && activeBloodStatus.equals("Blood Status")) {
+                                    if (persons.get(j).getHouse().equals(activeHouse)) {
+                                    }
+                                } else {
+                                    if (persons.get(j).getHouse().equals(activeHouse) && persons.get(j).getBloodStatus().equals(activeBloodStatus)) {
+                                        filteredList.add(searchedList.get(i));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                ArrayAdapter<String> personAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1);
+                listView.setAdapter(personAdapter);
+                personAdapter.addAll(filteredList);*/
             }
         });
     }
@@ -93,6 +128,7 @@ public class PersonsFragment extends Fragment {
         houseFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                activeHouse = houseFilter.getSelectedItem().toString();
                 final ListView listView = getActivity().findViewById(R.id.personList);
                 List<String> filteredList = new ArrayList<>();
 
@@ -121,6 +157,7 @@ public class PersonsFragment extends Fragment {
         bloodFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                activeBloodStatus = bloodFilter.getSelectedItem().toString();
                 final ListView listView = getActivity().findViewById(R.id.personList);
                 List<String> filteredList = new ArrayList<>();
 
@@ -183,6 +220,8 @@ public class PersonsFragment extends Fragment {
     }
 
     private void generateAlertDialog() {
+        ErrorHandler errorHandler = new ErrorHandler(getActivity());
+        errorHandler.alertApiError();
         Log.d("alert", "Could not get data.");
     }
 
@@ -204,27 +243,6 @@ public class PersonsFragment extends Fragment {
             Person person = null;
             try {
                 jsonObj = jsonArray.getJSONObject(i);
-                //JSONObject wand = jsonObj.getJSONObject("wand");
-
-/*                person = new Person(
-                        jsonObj.getString("name"),
-                        jsonObj.getString("species"),
-                        jsonObj.getString("gender"),
-                        jsonObj.getString("house"),
-                        jsonObj.getString("dateOfBirth"),
-                        jsonObj.getString("ancestry"),
-                        jsonObj.getString("eyeColour"),
-                        jsonObj.getString("hairColour"),
-                        new Wand(
-                                wand.getString("wood"),
-                                wand.getString("core"),
-                                wand.getInt("length")
-                        ),
-                        jsonObj.getString("patronus"),
-                        jsonObj.getString("actor"),
-                        jsonObj.getBoolean("alive"),
-                        jsonObj.getString("image")
-                );*/
                 person = new Person();
                 if (jsonObj.getString("name") != null) {
                     person.setName(jsonObj.getString("name"));
